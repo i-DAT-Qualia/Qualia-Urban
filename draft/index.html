@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Qualia-Urban</title>
+
+    <link href="https://s3-eu-west-1.amazonaws.com/artory-staging/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Lato:100,300,400,700,100italic,300italic,400italic,700italic' rel='stylesheet' type='text/css'>
+
+    <style>
+        body { padding-top: 70px; font-family: 'Lato', sans-serif; font-size: 18px;}
+
+        .carousel-control,.carousel-control.left,.carousel-control.right{ background: none;}
+        h1{font: 100 92px/1 "lato"; text-transform: uppercase; }
+        h2{font: 100 48px/1 "lato"; text-transform: uppercase; }
+
+
+        @media (min-width: 1200px) {
+            body{
+                margin-bottom: 100px;
+            }
+        }
+        @media (max-width: 1200px) {
+            body{
+                margin-bottom: none;
+            }
+
+        }
+        /*@media (max-width: 1444px) {*/
+            .navbar-fixed-top img{
+                width: 80px;
+            }
+        /*}*/
+        @media (max-width: 768px) {
+            body{
+                padding-top: 100px;
+            }
+            h1{font: 100 52px/1 "lato"; text-transform: uppercase; }
+        }
+
+
+        .navbar-fixed-bottom img {
+            height: 60px;
+        }
+        .navbar-static-bottom img {
+            height: 60px;
+            /*top: 100px;*/
+        }
+         .navbar-static-bottom{
+            margin-bottom: none;
+        }
+
+        #visualization{
+            z-index: -1;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: -10px;
+        }
+        .qualia-options{
+            padding-top: 5px;
+        }
+    </style>
+
+    <meta name="viewport" content="width=thing-width, initial-scale=1">
+
+      </head>
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <!--<div class="navbar-header">
+              <a class="navbar-brand" href="#"><img src="https://s3-eu-west-1.amazonaws.com/artory-staging/icons/logo-meta.png"></a>
+            </div>-->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="glyphicon glyphicon-align-justify"></span></button>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav navbar-left">
+
+
+          </ul>
+
+          <ul class="nav navbar-nav navbar-right">
+                    <li><a href="mailto:support@qualia.org.uk">Contact</a></li>
+                    <li><a href="https://github.com/i-dat-qualia">GitHub</a></li>
+                    <!--<li><a href="https://itunes.apple.com/gb/app/qualia/id710606097?mt=8&uo=4">App Store</a></li>
+                    <li><a href="https://play.google.com/store/apps/details?id=com.elixel.qualia">Google Play</a></li>-->
+                </ul>
+
+        </div>
+        </div>
+    </nav>
+
+
+<div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+<h1>Qualia-Urban</h1>
+<hr>
+
+<img src="https://docs.google.com/drawings/d/1Ug4Bq9DrdiMN4gLkfRa49c8YuaI59LKEsAWZERsNMeI/pub?w=3459&amp;h=2294" style="width:100%;">
+
+<p>This project is an extension of the Qualia project which aims to allow a Qualia Engine to handle many more different types of data. It is initially being developed for the upcoming MediaCities conference along with collaborators in DAT 203.</p>
+
+<hr>
+<h2>API Draft Specification</h2>
+<hr>
+
+<h3><b>Resources</b></h3>
+
+<p>Resources allow access to data stored within the Engine. Performing a GET request of the URL root will return a list of those types of objects. They are filterable by passing options into the query string.</p>
+
+<h3><i>Things</i></h3>
+
+<p>Things are physical objects. They have a location, which can be updated over time, and a list of channels, which take readings.</p>
+
+<hr><code>http://urban.qualia.org.uk/api/v3/thing/?api_key=API_KEY</code><br><br>
+
+<pre>
+{
+  "meta": {
+    "limit": 20,
+    "next": null,
+    "offset": 0,
+    "previous": null,
+    "total_count": 2
+  },
+  "objects": [
+    {
+      "added": "2014-10-23T00:01:05.569453",
+      "id": 1,
+      "image": "http://link-to-image.com",
+      "info": " Example text",
+      "location": {
+        "coordinates": [
+          -4.130859374424982,
+          19.88814027046907
+        ],
+        "recorded": "2014-10-23T00:01:05.569542",
+        "type": "Point"
+      },
+      "name": "A Sensor",
+      "resource_uri": "/api/v3/thing/1/",
+      "tags": ['sensor','arduino','203'],
+      "updated": "2014-10-23T00:01:05.569542"
+    },
+    {
+      "added": "2014-10-23T00:01:05.569453",
+      "id": 2,
+      "image": "http://link-to-image.com",
+      "info": " Example text",
+      "location": {
+        "coordinates": [
+          -4.130859374424982,
+          19.88814027046907
+        ],
+        "recorded": "2014-10-23T00:01:05.569542",
+        "type": "Point"
+      },
+      "name": "Another Sensor",
+      "resource_uri": "/api/v3/thing/2/",
+      "tags": ['sensor','arduino','203'],
+      "updated": "2014-10-23T00:01:05.569542"
+    }
+  ]
+}
+</pre>
+
+<hr><code>http://urban.qualia.org.uk/api/v3/thing/1/?api_key=API_KEY</code><br><br>
+
+<pre>
+{
+  "added": "2014-10-23T00:01:05.569453",
+  "id": 1,
+  "image": "http://link-to-image.com",
+  "info": " Example text",
+  "location": {
+    "coordinates": [
+      -4.130859374424982,
+      19.88814027046907
+    ],
+    "recorded": "2014-10-23T00:01:05.569542",
+    "type": "Point"
+  },
+  "name": "A Sensor",
+  "resource_uri": "/api/v3/thing/1/",
+  "tags": ['sensor','arduino','203'],
+  "updated": "2014-10-23T00:01:05.569542"
+}
+</pre>
+
+<hr><code>http://urban.qualia.org.uk/api/v3/thing/1/location/?api_key=API_KEY</code><br><br>
+
+<pre>
+{
+  "coordinates": [
+    -4.130859374424982,
+    19.88814027046907
+  ],
+  "recorded": "2014-10-23T00:01:05.569542",
+  "type": "Point"
+}
+</pre><hr>
+
+            <h3><i>Channels</i></h3>
+
+            <hr><code>http://urban.qualia.org.uk/api/v3/channel/?api_key=API_KEY</code><br><br>
+
+            <hr><code>http://urban.qualia.org.uk/api/v3/channel/1/?api_key=API_KEY</code><br><br>
+
+            <hr><code>http://urban.qualia.org.uk/api/v3/thing/1/channel/?api_key=API_KEY</code><br><br>
+
+            <hr><code>http://urban.qualia.org.uk/api/v3/thing/1/channel/1/?api_key=API_KEY</code><br><br>
+
+            <h3><i>Readings</i></h3>
+
+            <hr><code>http://urban.qualia.org.uk/api/v3/reading/?api_key=API_KEY</code><br><br>
+
+            <hr><code>http://urban.qualia.org.uk/api/v3/reading/1/?api_key=API_KEY</code><br><br>
+
+            <hr><code>http://urban.qualia.org.uk/api/v3/thing/1/channel/1/reading/?api_key=API_KEY</code><br><br>
+
+<h3><b>Collectors</b></h3>
+
+<p>Collectors allow new data to be submitted to the engine. At present, the user can POST JSON data to the following URLs. The examples are of the expected structure of the JSON data. It is envisaged that this data can be sent to the engine over HTTPS, MQTT, OSC and WebSockets.</p>
+
+<h3><i>Location</i></h3>
+
+<hr><code>http://urban.qualia.org.uk/api/v3/collector/location/</code><br><br>
+
+<pre>
+{
+  "api_key": "API_KEY",
+  "thing": 1,
+  "location":{
+    "coordinates": [
+      -4.130859374424982,
+      19.88814027046907
+    ],
+    "recorded": "2014-10-23T00:01:05.569542",
+    "type": "Point",
+  }
+}
+</pre><hr>
+
+<h3><i>Readings</i></h3>
+
+<hr><code>http://urban.qualia.org.uk/api/v3/collector/reading/</code><br><br>
+
+<pre>
+{
+  "api_key": "API_KEY",
+  "thing": 1,
+  "channel": 1,
+  "reading": {
+    "recorded": "2014-10-23T00:01:05.569542",
+    "type": "NUM",
+    "val": 12.3
+  }
+}
+</pre><hr>
+
+            <h3><b>Documents</b></h3>
+
+            <p>Documents are unstructured JSON objects that can be used to store information that won’t need to be updated but would be useful to be retrievable trough the API.</p>
+
+            <h3><i>Retrieving</i></h3>
+
+            <hr><code>http://urban.qualia.org.uk/api/v3/document/</code><br><br>
+
+            <hr><code>http://urban.qualia.org.uk/api/v3/document/1/?api_key=API_KEY</code><br><br>
+
+            <hr><code>http://urban.qualia.org.uk/api/v3/document/1/content/?api_key=API_KEY</code><br><br>
+
+        </div>
+        </div>
+
+
+
+
+
+        <!--<nav class="navbar navbar-default navbar-fixed-bottom visible-lg" role="navigation">
+            <div class="container-fluid">
+                <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="http://i-dat.org"><img src="https://s3-eu-west-1.amazonaws.com/artory-staging/icons/i-DAT-Logo-red_Create.png"></a></li>
+                </ul>
+                </div>
+            </div>
+        </nav>
+
+        <nav class="navbar navbar-default navbar-static-bottom hidden-lg" role="navigation">
+            <div class="container-fluid">
+                <ul class="nav navbar-nav">
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="http://i-dat.org"><img src="https://s3-eu-west-1.amazonaws.com/artory-staging/icons/i-DAT-Logo-red_Create.png"></a></li>
+                </ul>
+            </div>
+        </nav>-->
+
+    <script src="https://code.jquery.com/jquery-latest.js"></script>
+    <script src="https://s3-eu-west-1.amazonaws.com/artory-staging/bootstrap/js/bootstrap.min.js"></script>
+
+
+
+
+  </body>
+</html>
