@@ -6,7 +6,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 import json
 
-from qualia.accounts.models import QualiaUser
+from accounts.models import QualiaUser
 
 from provider.oauth2.backends import BasicClientBackend, RequestParamsClientBackend
 from provider.oauth2.models import AccessToken
