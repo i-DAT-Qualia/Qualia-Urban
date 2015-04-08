@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.gis.db import models
 from django.forms import ModelForm
+from django.contrib.postgres.fields import ArrayField
+from django.conf import settings
 
 
 class SensorMeta(models.Model):
@@ -8,6 +10,7 @@ class SensorMeta(models.Model):
     info = models.TextField(blank=True, null=True)
     added = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     updated = models.DateTimeField(auto_now=True, blank=True, null=True)
+    tags = ArrayField(models.CharField(max_length=200), blank=True, null=True)
 
     class Meta:
         abstract = True

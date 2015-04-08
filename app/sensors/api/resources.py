@@ -20,6 +20,9 @@ from sensors.models import *
 
 class ThingList(ModelResource):
 
+    channels = fields.ToManyField('sensors.api.resources.ChannelList', 'channel_set', full=True, null=True)
+    location = fields.ToManyField('sensors.api.resources.LocationList', 'location_set', full=True, null=True)
+
     class Meta:
         queryset = Thing.objects.all()
         resource_name = 'thing'
@@ -32,8 +35,13 @@ class ThingList(ModelResource):
             'name': ALL,
         }
 
+    def dehydrate_tags(self, bundle):
+        return bundle.obj.tags
+
 
 class ChannelList(ModelResource):
+
+    readings = fields.ToManyField('sensors.api.resources.ReadingList', 'reading_set', full=True, null=True)
 
     class Meta:
         queryset = Channel.objects.all()
@@ -46,6 +54,9 @@ class ChannelList(ModelResource):
         filtering = {
             'name': ALL,
         }
+
+    def dehydrate_tags(self, bundle):
+        return bundle.obj.tags
 
 
 class ReadingList(ModelResource):
