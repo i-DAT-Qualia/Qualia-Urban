@@ -17,6 +17,7 @@ class SensorMeta(models.Model):
 
 
 class Thing(SensorMeta):
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL)
 
     def __unicode__(self):
         return self.name
