@@ -1,0 +1,16 @@
+Django
+boto
+django-storages
+gunicorn
+psycopg2
+python-dateutil
+python-mimeparse
+wsgiref
+xlwt
+tornado==3.2.1
+requests
+python-memcached
+django-registration-redux
+markdown
+django-filter
+django-tastypie
