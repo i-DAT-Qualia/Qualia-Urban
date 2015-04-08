@@ -28,6 +28,17 @@
       - vim
       - build-essential
 
+      # Pillow
+      - libtiff4-dev
+      - libjpeg8-dev
+      - zlib1g-dev
+      - libfreetype6-dev
+      - liblcms2-dev
+      - libwebp-dev
+      - tcl8.5-dev
+      - tk8.5-dev
+      - python-tk
+
 - name: Enable Build
   sudo: yes
   shell: chmod 755 /vagrant/provision/setup/files/build_postgis.sh
