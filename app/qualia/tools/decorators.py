@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from provider.oauth2.backends import AccessTokenBackend
 from provider.oauth2.models import AccessToken
 
-from tools.authentication import OAuth20Authentication
+from qualia.tools.authentication import OAuth20Authentication
 
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import Context, loader, RequestContext
