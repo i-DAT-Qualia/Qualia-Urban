@@ -7,6 +7,7 @@
       - libpq-dev # Required for Ansible to interact with postgres
       - python-psycopg2 # Required for Ansible to interact with postgres
       - postgresql-server-dev-all
+      - postgresql-contrib
 
       # Python Dev
       - python-dev
@@ -81,6 +82,11 @@
   sudo: yes
   sudo_user: postgres
   command: psql -d {{ db_name }} -c "CREATE EXTENSION postgis_topology;"
+
+- name: enable hstore extension
+  sudo: yes
+  sudo_user: postgres
+  command: psql -d {{ db_name }} -c "CREATE EXTENSION hstore;"
 
 - name: Setup Virtualenv
   sudo: yes
