@@ -44,6 +44,7 @@ INSTALLED_APPS = (
     'provider',
     'provider.oauth2',
     'sensors',
+    'documents'
 )
 
 AUTH_USER_MODEL = 'accounts.QualiaUser'
