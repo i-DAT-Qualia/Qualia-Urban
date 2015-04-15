@@ -1,8 +1,8 @@
+psycopg2
 Django
 boto
 django-storages
 gunicorn
-psycopg2
 python-dateutil
 python-mimeparse
 wsgiref
@@ -19,3 +19,6 @@ https://github.com/glassresistor/django-oauth2-provider/archive/django1.7-compat
 pillow
 django-imagekit
 django-leaflet
+paho-mqtt
+numpy
+pyzmq
