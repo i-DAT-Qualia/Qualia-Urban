@@ -2,9 +2,11 @@ from django.db import models
 from django.forms import ModelForm
 from django.contrib.postgres.fields import ArrayField, HStoreField
 from django.conf import settings
+import uuid
 
 
 class Document(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(db_index=True, max_length=250)
 
     # meta

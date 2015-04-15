@@ -5,6 +5,7 @@ from django.db import models, migrations
 import django.contrib.postgres.fields
 from django.conf import settings
 import django.contrib.postgres.fields.hstore
+import uuid
 
 
 class Migration(migrations.Migration):
@@ -17,7 +18,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Document',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('id', models.UUIDField(default=uuid.uuid4, serialize=False, editable=False, primary_key=True)),
                 ('name', models.CharField(max_length=250, db_index=True)),
                 ('info', models.TextField(null=True, blank=True)),
                 ('added', models.DateTimeField(auto_now_add=True, null=True)),

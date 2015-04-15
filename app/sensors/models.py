@@ -3,9 +3,11 @@ from django.contrib.gis.db import models
 from django.forms import ModelForm
 from django.contrib.postgres.fields import ArrayField
 from django.conf import settings
+import uuid
 
 
 class SensorMeta(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(db_index=True, max_length=250)
     info = models.TextField(blank=True, null=True)
     added = models.DateTimeField(auto_now_add=True, null=True, blank=True)
@@ -31,6 +33,7 @@ class Channel(SensorMeta):
 
 
 class Reading(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     channel = models.ForeignKey(Channel)
     added = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     value = models.FloatField()
@@ -40,6 +43,7 @@ class Reading(models.Model):
 
 
 class Location(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     thing = models.ForeignKey(Thing)
     added = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     gps = models.PointField()

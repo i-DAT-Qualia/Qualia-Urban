@@ -30,6 +30,7 @@ class ThingList(ModelResource):
         authentication = KeyOnlyAuthentication()
         authorization = DjangoAuthorization()
         always_return_data = True
+        detail_uri_name = 'id'
 
         filtering = {
             'name': ALL,
@@ -50,6 +51,7 @@ class ChannelList(ModelResource):
         authentication = KeyOnlyAuthentication()
         authorization = DjangoAuthorization()
         always_return_data = True
+        detail_uri_name = 'id'
 
         filtering = {
             'name': ALL,
@@ -68,6 +70,7 @@ class ReadingList(ModelResource):
         authentication = KeyOnlyAuthentication()
         authorization = DjangoAuthorization()
         always_return_data = True
+        detail_uri_name = 'id'
 
         filtering = {
             'name': ALL,
@@ -83,6 +86,7 @@ class LocationList(ModelResource):
         authentication = KeyOnlyAuthentication()
         authorization = DjangoAuthorization()
         always_return_data = True
+        detail_uri_name = 'id'
 
         filtering = {
             'name': ALL,

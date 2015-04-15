@@ -27,6 +27,7 @@ class DocumentList(ModelResource):
         authentication = KeyOnlyAuthentication()
         authorization = DjangoAuthorization()
         always_return_data = True
+        detail_uri_name = 'id'
 
         filtering = {
             'name': ALL,
