@@ -131,3 +131,8 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 10,
     'DEFAULT_FILTER_BACKENDS': ('rest_framework.filters.DjangoFilterBackend',),
 }
+
+MQTT_ADDRESS = 'broker.i-dat.org'
+MQTT_PORT = 80
+MQTT_SOCKET_PORT = 8000
+MQTT_CLIENT_ID = 'datalab-sender'
