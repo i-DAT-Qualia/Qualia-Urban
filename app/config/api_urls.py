@@ -22,7 +22,7 @@ urlpatterns = [
     url(r'^v2/logout/', 'accounts.api.register.logout_user'),
 
     # API Collectors
-    # url(r'^v2/collector/photo/', 'interaction.api.collector.collect_photo'),
+    url(r'^v3/collector/reading/', 'sensors.api.collectors.collect_reading'),
 
 
     # Tastypie API
