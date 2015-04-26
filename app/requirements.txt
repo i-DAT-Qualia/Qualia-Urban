@@ -22,3 +22,5 @@ django-leaflet
 paho-mqtt
 numpy
 pyzmq
+defusedxml
+lxml

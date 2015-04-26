@@ -136,3 +136,5 @@ MQTT_ADDRESS = 'broker.i-dat.org'
 MQTT_PORT = 80
 MQTT_SOCKET_PORT = 8000
 MQTT_CLIENT_ID = 'datalab-sender'
+
+TASTYPIE_DEFAULT_FORMATS = ['json', 'xml']
