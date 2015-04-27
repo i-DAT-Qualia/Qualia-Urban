@@ -55,6 +55,11 @@ class QualiaUser(AbstractBaseUser):
 
     USERNAME_FIELD = 'email'
 
+    def get_api_key(self):
+        from tastypie.models import ApiKey
+        obj, created = ApiKey.objects.get_or_create(user=self)
+        return obj.key
+
     def get_full_name(self):
         return self.email
 
