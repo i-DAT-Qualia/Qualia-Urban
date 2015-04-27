@@ -116,6 +116,6 @@ def dashboard_level_required(view_func, user_level=2, redirect_field_name=REDIRE
     Based on staff_member_required, checks if user is of high enough level to access the dashboard
     '''
     return user_passes_test(
-        lambda u: u.is_active and (u.user_level >= user_level),
+        lambda u: u.is_active and (u.level >= user_level),
         redirect_field_name=redirect_field_name
     )(view_func)
