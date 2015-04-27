@@ -23,6 +23,7 @@ urlpatterns = [
 
     # API Collectors
     url(r'^v3/collector/reading/', 'sensors.api.collectors.collect_reading'),
+    url(r'^v3/collector/location/', 'sensors.api.collectors.collect_location'),
 
 
     # Tastypie API
