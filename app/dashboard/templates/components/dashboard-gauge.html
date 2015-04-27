@@ -1,0 +1,39 @@
+{% load staticfiles %}
+{% load ui %}
+<div class="col-md-4">
+  <h3>{{data.name}}</h3>
+  <h4>{{data.answered}} Responded</h4>
+  <div id="{{data.id}}"></div>
+  <script>
+  //window.onload = function() {
+    var {{data.id}} = c3.generate({
+      bindto: '#{{data.id}}',
+      tooltip: {
+        show: false
+      },
+      data: {
+        columns: [
+        ['Average Score', {{data.average}}]
+        ],
+        type: 'gauge',
+      },
+      gauge: {
+        label: {
+          format: function(value, ratio) {
+            return value;
+          },
+        },
+        min: 1,
+        max: 7,
+        width: 40
+      },
+      color: {
+        pattern: ["#ef3725","#ff4f19","#ff7f21","#ffaa21","#fbcf04","#a0eb11","#48c312"],
+        threshold: {
+          values: [1, 2, 3, 4, 5, 6, 7]
+        }
+      },
+    });
+  //};
+  </script>
+</div>

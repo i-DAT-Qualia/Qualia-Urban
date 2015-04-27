@@ -1,0 +1,138 @@
+{% load staticfiles %}
+{% load ui %}    
+<div class="col-md-3">
+<script type="text/processing" data-processing-target="processing-canvas-{{id}}">
+    /* @pjs font="{% static 'fonts/Montserrat-Regular.ttf' %}"; font="{% static 'fonts/Montserrat-Bold.ttf' %}"; */
+
+PImage circles;
+PFont fontRegular, fontRegular80, fontBold;
+
+float circleInRadians = 6.28318531;
+float startPoint = -1.57079633;
+float segment = 0.00000001;
+
+var scale_string = "{{scale_string}}";
+var data_string = "{{data_string}}";
+var number_string = "{{number_string}}";
+var percentage = "{{percentage}}";
+
+color ring = #C6C8CA;
+
+void setup() {
+  if (scale_string != "CURRENT AVERAGE"){
+    number_string = {{number_string}};
+  }
+
+  size(342, 472);
+  
+  smooth();
+  //circles = loadImage("circles.png");
+  fontRegular = loadFont("{% static 'fonts/Montserrat-Regular.ttf' %}");
+  fontRegular80 = loadFont("{% static 'fonts/Montserrat-Regular.ttf' %}");
+  fontBold= loadFont("{% static 'fonts/Montserrat-Bold.ttf' %}");
+  //noLoop();
+}
+
+void draw() {
+  drawChart();
+}
+
+void drawChart(){
+  //translate(0,0);  
+  //rotate(0);
+  //background(246);
+  background(255);
+  //image(circles, 0, 0);
+  
+  //Top rectangle
+  fill(198);
+  noStroke();
+  rect(5, 5, 331, 13);
+
+  //Top text
+  textAlign(LEFT);
+  textFont(fontBold);
+  textSize(14);
+  fill(29);
+  //text("NUMBER OF", 7, 35);
+  text(scale_string, 7, 35);
+  
+  textFont(fontRegular);
+  textSize(30);
+  fill(87);
+  //text("Visitors \nUsing App", 6, 66);
+  text(data_string, 6, 66);
+  
+  stroke(87);
+  strokeWeight(1);
+  line(5, 465, 337, 465);
+  line(5, 120, 337, 120);
+
+  ellipseMode(RADIUS);  // Set ellipseMode to RADIUS
+  //fill(255);  // Set fill to white
+  noFill();
+  smooth();
+  strokeCap(ROUND);
+  strokeWeight(20);
+  stroke(ring);
+  ellipse(171, 298, 110, 110); 
+  
+  stroke(#4a78bc);
+  
+  textFont(fontRegular80);
+  fill(29);
+  textSize(60);
+  textAlign(CENTER);
+  text(number_string, 171, 320);
+
+  //arc(250, 250, 220, 220, startPoint, 0);
+  drawOuter(percentage);
+  //console.log({{percentage}});
+  //drawOuter(50.0);
+
+  //println("X: "+mouseX);
+  //println("Y: "+mouseY);
+ // delay(200);
+}
+
+void drawOuter(float percentage){
+    noFill();
+    float val = ((circleInRadians / 100) * percentage);
+    translate(171, 298);
+    rotate(startPoint);
+
+    var slice = 100 / 7
+    var the_color = color(#{% colour_code 1 %});
+    
+    if (percentage <= slice){
+      the_color = color(#{% colour_code 1 %});
+    } else if ((percentage >= slice) && (percentage <= (slice*2))){
+      the_color = color(#{% colour_code 2 %});
+    } else if ((percentage >= (slice*2)) && (percentage <= (slice*3))){
+      the_color = color(#{% colour_code 3 %});
+    } else if ((percentage >= (slice*3)) && (percentage <= (slice*4))){
+      the_color = color(#{% colour_code 4 %});
+    } else if ((percentage >= (slice*4)) && (percentage <= (slice*5))){
+      the_color = color(#{% colour_code 5 %});
+    } else if ((percentage >= (slice*5)) && (percentage <= (slice*6))){
+      the_color = color(#{% colour_code 6 %});
+    } if (percentage > (slice * 6)){
+      the_color = color(#{% colour_code 7 %});
+    }
+
+    /*var from = color(#00FFFF);
+    var to = color(#FF0000);
+    var inter = lerpColor(from, to, (percentage/100));*/
+    stroke(the_color);
+    arc(0, 0, 110, 110, 0, val);
+}
+
+void updateValue(){
+    number_string++;
+    //draw();
+};
+
+
+    </script>
+<canvas class="circle-canvas" id="processing-canvas-{{id}}">Loading... </canvas>
+</div>
