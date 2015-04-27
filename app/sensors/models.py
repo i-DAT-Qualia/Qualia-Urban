@@ -24,12 +24,24 @@ class Thing(SensorMeta):
     def __unicode__(self):
         return self.name
 
+    def location_list(self):
+        return Location.objects.filter(thing=self).order_by('-added')
+
+    def last_location(self):
+        return Location.objects.filter(thing=self).order_by('added').last()
+
+    def channel_list(self):
+        return Channel.objects.filter(thing=self).order_by('-added')
+
 
 class Channel(SensorMeta):
     thing = models.ForeignKey(Thing)
 
     def __unicode__(self):
         return self.name
+
+    def reading_list(self):
+        return Reading.objects.filter(channel=self).order_by('-added')[:5]
 
 
 class Reading(models.Model):
