@@ -25,7 +25,7 @@ class ThingList(ModelResource):
 
     class Meta:
         queryset = Thing.objects.all()
-        resource_name = 'thing'
+        resource_name = 'device'
         allowed_methods = ['get']
         authentication = KeyOnlyAuthentication()
         authorization = DjangoAuthorization()
