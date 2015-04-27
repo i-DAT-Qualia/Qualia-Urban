@@ -1,0 +1,77 @@
+{% extends "dash_base.html" %}
+{% load staticfiles %}
+{% load ui %}
+
+{% block title %}Device List{% endblock %}
+
+{% block nav %}
+    {% show_menu 'Devices' user %}
+{% endblock %}
+
+{% block rightnav %}
+    <li><a href="/dashboard/content/devices/add/">Add Device</a></li>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+        <ul class="nav nav-tabs" role="tablist">
+          <li class="active"><a href="#mine" role="tab" data-toggle="tab">My Devices</a></li>
+          <li><a href="#all" role="tab" data-toggle="tab">All Devices</a></li>
+        </ul>
+
+        <div class="tab-content">
+          <div class="tab-pane active" id="mine">
+            <table class="table table-hover">
+            <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>ID</th>
+                  <th>Tags</th>
+                </tr>
+          </thead>
+          <tbody>
+            {% for device in mine %}
+                <tr>
+                  <td><a href="/dashboard/content/devices/{{device.id}}/">{{device.name}}</a></td>
+                  <td>{{device.id}}</td>
+                  <td>{%for tag in device.tags%}{{tag}}, {% endfor %}</td>
+                </tr>
+
+            {% endfor %}
+            </tbody>
+        </table>
+
+          </div>
+
+
+
+          <div class="tab-pane" id="all">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>ID</th>
+                  <th>Tags</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for device in all %}
+                <tr>
+                  <td><a href="/dashboard/content/devices/{{device.id}}/">{{device.name}}</a></td>
+                  <td>{{device.id}}</td>
+                  <td>{%for tag in device.tags%}{{tag}}, {% endfor %}</td>
+                </tr>
+
+                {% endfor %}
+              </tbody>
+            </table>
+
+          </div>
+        </div>
+
+
+
+</div>
+
+
+{% endblock %}
