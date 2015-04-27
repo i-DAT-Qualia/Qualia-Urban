@@ -1,0 +1,141 @@
+{% extends "dash_base.html" %}
+{% load staticfiles %}
+{% load ui %}
+{% load leaflet_tags %}
+
+{% block title %}Device: {{device.name}}{% endblock %}
+
+{% block nav %}
+    {% show_menu 'Device: '|add:device.name user%}
+{% endblock %}
+
+{% block rightnav %}
+{% if can_edit %}
+<li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Actions <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="/dashboard/content/devices/{{device.id}}/channel/add/">Add Channel</a></li>
+            <li><a href="/dashboard/content/devices/{{device.id}}/location/">Update Location</a></li>
+            <li class="divider"></li>
+            <li><a href="/dashboard/content/devices/{{device.id}}/edit/">Edit device</a></li>
+          </ul>
+        </li>
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+        <!--<h2>{{device.name}}</h2>
+        <hr> -->
+
+        <ul class="nav nav-tabs" role="tablist">
+          <li class="active"><a href="#overview" role="tab" data-toggle="tab">Overview</a></li>
+          <li><a href="#channels" role="tab" data-toggle="tab">Channels</a></li>
+          <li><a href="#locations" role="tab" data-toggle="tab">Location History</a></li>
+          <li><a href="#api" role="tab" data-toggle="tab">API</a></li>
+        </ul>
+
+        <div class="tab-content">
+          <div class="tab-pane active" id="overview">
+
+            <div class="row">
+                <div class="col-md-7">
+                <script type="text/javascript">
+                    function map_init_basic (map, options) {
+                        {%if device.last_location %}
+                        L.marker([{{device.last_location.gps.y}},{{device.last_location.gps.x}}]).addTo(map);
+                        map.setView([{{device.last_location.gps.y}}, {{device.last_location.gps.x}}], 16);
+                        {% endif %}
+                    }
+                </script>
+                {% leaflet_map "venuemap" callback="window.map_init_basic" %}
+
+                </div>
+                <div class="col-md-5">
+                  <h3>Info:</h3>
+                  <p>{{device.info}}</p>
+                  <h3>Tags:</h3>
+                  <ul>
+                    {%for tag in device.tags%}
+                    <li>{{tag}}</li>
+                    {% endfor %}
+                  </ul>
+                </div>
+            </div>
+          </div>
+          <div class="tab-pane" id="channels">
+
+
+            {% for channel in device.channel_list %}
+            <div class="row">
+              <div class="col-md-12">
+                <h3>{{channel.name}}</h3>
+                <p>ID: {{channel.id}}</p>
+            <table class="table table-hover">
+            <thead>
+                <tr>
+                  <th>Added</th>
+                  <th>Value</th>
+                </tr>
+          </thead>
+          <tbody>
+            {% for reading in channel.reading_list%}
+                <tr>
+                  <td>{{reading.added}}</td>
+                  <td>{{reading.value}}</td>
+                </tr>
+            {% endfor %}
+
+              </tbody>
+          </table>
+        </div>
+      </div>
+
+            {% endfor %}
+
+          </div>
+          <div class="tab-pane" id="locations">
+            <div class="row">
+              <div class="col-md-12">
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>Added</th>
+                      <th>Lat</th>
+                      <th>Long</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for l in device.location_list %}
+                    <tr>
+                      <td>{{l.added}}</td>
+                      <td>{{l.gps.y}}</td>
+                      <td>{{l.gps.x}}</td>
+                    </tr>
+
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+          </div>
+          <div class="tab-pane" id="api">
+            <div class="row">
+              <div class="col-md-12">
+                <h3>To access this device's data through the Urban API, send a GET Request to:</h3>
+                <code>http://urban.qualia.org.uk/api/v3/device/{{device.id}}/?api_key={{user.get_api_key}}</code>
+
+              </div>
+            </div>
+
+          </div>
+      </div>
+
+
+
+</div>
+</div>
+
+
+{% endblock %}
