@@ -10,6 +10,7 @@ urlpatterns = [
     # accounts
     url(r'^accounts/', include('registration.backends.default.urls')),
     url(r'^forgot/', 'accounts.views.reset_password_page'),
+    url(r'dashboard/', include('dashboard.urls')),
 
     url(r'^favicon\.ico$', RedirectView.as_view(url=settings.STATIC_URL + settings.FAVICON)),
 ]

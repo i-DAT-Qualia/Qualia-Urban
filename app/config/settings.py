@@ -41,11 +41,13 @@ INSTALLED_APPS = (
     'django.contrib.gis',
     'django.contrib.postgres',
     'tastypie',
+    'leaflet',
     'provider',
     'provider.oauth2',
     'registration',
     'sensors',
-    'documents'
+    'documents',
+    'dashboard'
 )
 
 AUTH_USER_MODEL = 'accounts.QualiaUser'
@@ -127,6 +129,7 @@ FAVICON = 'icons/artory_favicon.ico'
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = '/var/www/static/'
 
 REST_FRAMEWORK = {
     'PAGE_SIZE': 10,
