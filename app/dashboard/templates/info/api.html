@@ -1,0 +1,24 @@
+{% extends "dash_base.html" %}
+{% load staticfiles %}
+{% load ui %}
+
+{% block title %}Information: API{% endblock %}
+
+{% block nav %}
+    {% show_menu 'Information: API' user %}
+{% endblock %}
+
+{% block rightnav %}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+      <div class="col-md-12">
+      <h3>Your API key is: {{user.get_api_key}}</h3>
+      </div>
+
+</div>
+
+
+{% endblock %}
