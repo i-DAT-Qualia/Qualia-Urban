@@ -16,6 +16,11 @@ import json
 from qualia.tools.decorators import dashboard_level_required
 
 
+def front_page(request):
+    return render_to_response('draft/index.html', {
+    }, context_instance=RequestContext(request))
+
+
 @dashboard_level_required
 def api_info(request):
     return render_to_response('info/api.html', {
