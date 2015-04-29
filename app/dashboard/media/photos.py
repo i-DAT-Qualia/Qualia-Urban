@@ -88,6 +88,10 @@ def get_lat_lon(gps_info):
             lon = _convert_to_degress(gps_longitude)
             if gps_longitude_ref != "E":
                 lon = 0 - lon
+    if not lat:
+        return None
+    if not long:
+        return None
 
     return Point(lon, lat)
 
