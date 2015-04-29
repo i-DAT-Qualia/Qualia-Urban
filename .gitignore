@@ -58,3 +58,5 @@ app/include
 app/local
 
 .vagrant/
+
+app/uploads/
