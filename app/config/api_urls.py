@@ -2,6 +2,8 @@ from django.conf.urls import patterns, include, url
 
 from sensors.api.resources import *
 from documents.api.resources import *
+from media.api.resources import *
+
 from tastypie.api import Api
 
 from django.conf import settings
@@ -12,6 +14,7 @@ v3_api.register(ChannelList())
 v3_api.register(ReadingList())
 v3_api.register(LocationList())
 v3_api.register(DocumentList())
+v3_api.register(PhotoList())
 
 urlpatterns = [
 
