@@ -60,3 +60,4 @@ app/local
 .vagrant/
 
 app/uploads/
+app/CACHE/
