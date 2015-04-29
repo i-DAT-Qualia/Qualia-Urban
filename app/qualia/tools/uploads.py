@@ -1,6 +1,7 @@
 import uuid
 import os
 
+
 def get_image_path(instance, filename):
     ext = filename.split('.')[-1]
     ext = filename.split('.')[1]

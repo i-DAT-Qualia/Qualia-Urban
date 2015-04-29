@@ -17,14 +17,14 @@ class MediaMeta(models.Model):
     updated = models.DateTimeField(auto_now=True, blank=True, null=True)
     tags = ArrayField(models.CharField(max_length=200), blank=True, null=True)
 
-    gps = models.PointField()
+    gps = models.PointField(blank=True, null=True)
     objects = models.GeoManager()
 
     class Meta:
         abstract = True
 
 
-class Photo(models.Model):
+class Photo(MediaMeta):
     image = models.ImageField(upload_to=get_image_path, blank=True, null=True)
     large = ImageSpecField(
         source='image',
@@ -40,4 +40,4 @@ class Photo(models.Model):
     )
 
     def __unicode__(self):
-        return self.id
+        return str(self.id)
