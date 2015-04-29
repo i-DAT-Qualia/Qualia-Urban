@@ -26,8 +26,24 @@
                     <label for="id_image" class="col-sm-2 control-label">Photo</label>
                     {{ form.image.errors }}
                     <div class="col-sm-10">
-                       <p class="help-block"></p>
+                       <p class="help-block">Hit the choose file button and select an image to upload</p>
                       {{form.image}}
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="id_info" class="col-sm-2 control-label">Description</label>
+                    {{ form.info.errors }}
+                    <div class="col-sm-10">
+                        {{form.info|addboot:"Write a little something about what's in the image"}}
+                    </div>
+                   </div>
+
+                  <div class="form-group">
+                    <label for="id_tags" class="col-sm-2 control-label">Tags</label>
+                    {{ form.tags.errors }}
+                    <div class="col-sm-10">
+                      {{form.tags|addboot:"Add a few tags about the image with a comma between each ones"}}
                     </div>
                   </div>
 

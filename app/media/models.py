@@ -16,6 +16,7 @@ class MediaMeta(models.Model):
     added = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     updated = models.DateTimeField(auto_now=True, blank=True, null=True)
     tags = ArrayField(models.CharField(max_length=200), blank=True, null=True)
+    info = models.TextField(blank=True, null=True)
 
     gps = models.PointField(blank=True, null=True)
     objects = models.GeoManager()

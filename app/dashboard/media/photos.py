@@ -26,7 +26,7 @@ class PhotoForm(ModelForm):
 
     class Meta:
         model = Photo
-        fields = ['tags', 'image']
+        fields = ['tags', 'info', 'image']
 
         widgets = {
         }
