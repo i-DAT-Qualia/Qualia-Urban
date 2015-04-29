@@ -122,7 +122,7 @@ CACHES = {
 #Branding settings
 APP_NAME = 'Qualia-Urban'
 QUALIA_NAME = 'Qualia Urban'
-LOGO = 'icons/logo-meta.png'
+LOGO = 'logos/1.jpg'
 FAVICON = 'icons/artory_favicon.ico'
 
 
