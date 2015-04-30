@@ -191,25 +191,28 @@
 
 </style>
 
-<script src="http://git.eclipse.org/c/paho/org.eclipse.paho.mqtt.javascript.git/plain/src/mqttws31.js"></script>
+<script src="{{STATIC_URL}}js/mqttws31.js"></script>
 <script>
 $( document ).ready(function() {
 // Create a client instance
-client = new Paho.MQTT.Client("broker.i-dat.org", 8000,"","clientId-TXM0SnLDpyqdads");
+randomnumber = Math.floor(Math.random()*111213123123132)
+client = new Paho.MQTT.Client("broker.i-dat.org", 8000,"","clientId" + randomnumber);
 
 // set callback handlers
 client.onConnectionLost = onConnectionLost;
 client.onMessageArrived = onMessageArrived;
 
 // connect the client
-client.connect({onSuccess:onConnect});
+connectOptions = {keepAliveInterval:600000, onSuccess:onConnect}
+
+client.connect(connectOptions);
 
 
 // called when the client connects
 function onConnect() {
   // Once a connection has been made, make a subscription and send a message.
   console.log("onConnect");
-  client.subscribe("world");
+  client.subscribe("transProp/post/#");
 }
 
 // called when the client loses its connection
@@ -222,6 +225,7 @@ function onConnectionLost(responseObject) {
 // called when a message arrives
 function onMessageArrived(message) {
   console.log("onMessageArrived:"+message.payloadString);
+  console.log("onMessageArrived:"+message.destinationName);
 }
 
 });
