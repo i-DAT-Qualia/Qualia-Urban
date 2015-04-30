@@ -26,6 +26,11 @@ def draft_page(request):
     }, context_instance=RequestContext(request))
 
 
+def props_page(request):
+    return render_to_response('props/index.html', {
+    }, context_instance=RequestContext(request))
+
+
 @dashboard_level_required
 def api_info(request):
     return render_to_response('info/api.html', {
