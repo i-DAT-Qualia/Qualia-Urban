@@ -1,0 +1,66 @@
+{% extends "dash_base.html" %}
+{% load staticfiles %}
+{% load ui %}
+
+{% block title %}Transactional Props{% endblock %}
+
+
+
+  {% block nav %}
+  <li><a href="">Transactional Props</a></li>
+  {% endblock %}
+
+
+
+{% block rightnav %}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+
+            </div>
+          </div>
+</div>
+
+{% endblock %}
+
+{% block pageScripts %}
+
+<script src="http://git.eclipse.org/c/paho/org.eclipse.paho.mqtt.javascript.git/plain/src/mqttws31.js"></script>
+<script>
+$( document ).ready(function() {
+// Create a client instance
+client = new Paho.MQTT.Client("broker.i-dat.org", 8000,"","clientId-TXM0SnLDpyqdads");
+
+// set callback handlers
+client.onConnectionLost = onConnectionLost;
+client.onMessageArrived = onMessageArrived;
+
+// connect the client
+client.connect({onSuccess:onConnect});
+
+
+// called when the client connects
+function onConnect() {
+  // Once a connection has been made, make a subscription and send a message.
+  console.log("onConnect");
+  client.subscribe("world");
+}
+
+// called when the client loses its connection
+function onConnectionLost(responseObject) {
+  if (responseObject.errorCode !== 0) {
+    console.log("onConnectionLost:"+responseObject.errorMessage);
+  }
+}
+
+// called when a message arrives
+function onMessageArrived(message) {
+  console.log("onMessageArrived:"+message.payloadString);
+}
+
+});
+</script>
+{% endblock %}
