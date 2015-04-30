@@ -17,129 +17,87 @@
 
 {% block content %}
 <div class="container-fluid">
-        <div class="row">
-            <div class="col-eighth" id="combined">
-              <div class="colheader">
-                <h4>@Combined</h4>
-                <hr>
-              </div>
+  <div class="row">
+    <div class="col-eighth" id="combined">
+      <div class="colheader">
+        <h4>#transactionalprops</h4>
+        <hr>
+      </div>
 
-            </div>
-            <div class="col-eighth" id="spikynozzle">
-              <div class="colheader">
-                <img class="avatar center-block img-rounded" src="{{STATIC_URL}}props/spikynozzle.png">
-                <h4>@spknozzle</h4>
-                <hr>
-              </div>
+      <div class="message-list"></div>
 
-<!--               <ul class="list-group">
-                <li class="list-group-item message">
-                  <p class="timestamp text-right">15:40:37</p>
-                  <p class="body">Tilt  HIGH #transactionalprops</p>
-                </li>
-                <li class="list-group-item message">
-                  <p class="timestamp text-right">15:40:37</p>
-                  <p class="body">Body of the message</p>
-                </li>
-                <li class="list-group-item message">
-                  <p class="timestamp text-right">15:40:37</p>
-                  <p class="body">Body of the message</p>
-                </li>
-              </ul> -->
+    </div>
+    <div class="col-eighth" id="spikynozzle">
+      <div class="colheader">
+        <img class="avatar center-block img-rounded" src="{{STATIC_URL}}props/spikynozzle.png">
+        <h4>@spknozzle</h4>
+        <hr>
+      </div>
 
-              <div class="message-list">
-                <div class="message">
-                  <p class="timestamp text-right">15:40:37</p>
-                  <p class="body">Body of the message</p>
-                  <!-- message -->
-                </div>
+      <div class="message-list"></div>
 
-                <div class="message">
-                  <p class="timestamp text-right">15:40:37</p>
-                  <p class="body">Body of the message</p>
-                  <!-- message -->
-                </div>
+    </div>
+    <div class="col-eighth" id="greencutter">
+      <div class="colheader">
+        <img class="avatar img-rounded" src="{{STATIC_URL}}props/greencutter.png">
+        <h4>@grnCutter</h4>
+        <hr>
+      </div>
 
-                <div class="message">
-                  <p class="timestamp text-right">15:40:37</p>
-                  <p class="body">Body of the message</p>
-                  <!-- message -->
-                </div>
-              </div>
+      <div class="message-list"></div>
 
-            </div>
-            <div class="col-eighth" id="greencutter">
-              <div class="colheader">
-                <img class="avatar img-rounded" src="{{STATIC_URL}}props/greencutter.png">
-                <h4>@grnCutter</h4>
-                <hr>
-              </div>
-              <div class="message-list">
+    </div>
+    <div class="col-eighth" id="orangecutter">
+      <div class="colheader">
+        <img class="avatar img-rounded" src="{{STATIC_URL}}props/orangecutter.png">
+        <h4>@orngcutter</h4>
+        <hr>
+      </div>
 
-              </div>
+      <div class="message-list"></div>
 
-            </div>
-            <div class="col-eighth" id="orangecutter">
-              <div class="colheader">
-                <img class="avatar img-rounded" src="{{STATIC_URL}}props/orangecutter.png">
-                <h4>@orngcutter</h4>
-                <hr>
-              </div>
+    </div>
+    <div class="col-eighth" id="funnel">
+      <div class="colheader">
+        <img class="avatar img-rounded" src="{{STATIC_URL}}props/funnel.png">
+        <h4>@plstkfunnel</h4>
+        <hr>
+      </div>
 
-              <div class="message-list">
+      <div class="message-list"></div>
 
-              </div>
+    </div>
+    <div class="col-eighth" id="greenglass">
+      <div class="colheader">
+        <img class="avatar img-rounded" src="{{STATIC_URL}}props/greenglass.png">
+        <h4>@grnGlass</h4>
+        <hr>
+      </div>
 
-            </div>
-            <div class="col-eighth" id="funnel">
-              <div class="colheader">
-                <img class="avatar img-rounded" src="{{STATIC_URL}}props/funnel.png">
-                <h4>@plstkfunnel</h4>
-                <hr>
-              </div>
+      <div class="message-list"></div>
 
-              <div class="message-list">
+    </div>
+    <div class="col-eighth" id="pinkglass">
+      <div class="colheader">
+        <img class="avatar img-rounded" src="{{STATIC_URL}}props/pinkglass.png">
+        <h4>@pnkGlass</h4>
+        <hr>
+      </div>
 
-              </div>
+      <div class="message-list"></div>
 
-            </div>
-            <div class="col-eighth" id="greenglass">
-              <div class="colheader">
-                <img class="avatar img-rounded" src="{{STATIC_URL}}props/greenglass.png">
-                <h4>@grnGlass</h4>
-                <hr>
-              </div>
+    </div>
+    <div class="col-eighth" id="flatnozzle">
+      <div class="colheader">
+        <img class="avatar img-rounded" src="{{STATIC_URL}}props/flatnozzle.png">
+        <h4>@fltnozzle</h4>
+        <hr>
+      </div>
 
-              <div class="message-list">
+      <div class="message-list"></div>
 
-              </div>
-
-            </div>
-            <div class="col-eighth" id="pinkglass">
-              <div class="colheader">
-                <img class="avatar img-rounded" src="{{STATIC_URL}}props/pinkglass.png">
-                <h4>@pnkGlass</h4>
-                <hr>
-              </div>
-
-              <div class="message-list">
-
-              </div>
-
-            </div>
-            <div class="col-eighth" id="flatnozzle">
-              <div class="colheader">
-                <img class="avatar img-rounded" src="{{STATIC_URL}}props/flatnozzle.png">
-                <h4>@fltnozzle</h4>
-                <hr>
-              </div>
-
-              <div class="message-list">
-
-              </div>
-
-            </div>
-          </div>
+    </div>
+  </div>
 </div>
 
 {% endblock %}
@@ -176,7 +134,7 @@
   }
 
   .col-eighth:nth-child(even) {
-    background-color: rgba(200, 200, 200, .2);
+    background-color: rgb(180, 180, 180);
   }
 
   .col-eighth {
@@ -186,9 +144,6 @@
     width: 12vw;
     float: left;
   }
-
-
-
 </style>
 
 <script src="{{STATIC_URL}}js/mqttws31.js"></script>
@@ -227,37 +182,24 @@ function onMessageArrived(message) {
   console.log("onMessageArrived:"+message.payloadString);
   console.log("onMessageArrived:"+message.destinationName);
 
-  if(message.destinationName == "transProp/post/funnel/"){
+  var date = new Date();
+  var time = date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
 
-  }
-
-  if(message.destinationName == "transProp/post/greencutter/"){
-
-  }
-
-  if(message.destinationName == "transProp/post/orangecutter/"){
-
-  }
-
-  if(message.destinationName == "transProp/post/nozzletip/"){
-
-  }
-
-  if(message.destinationName == "transProp/post/greenglass/"){
-
-  }
-
-  if(message.destinationName == "transProp/post/pinkglass/"){
-
-  }
-
-  if(message.destinationName == "transProp/post/flatnozzle/"){
-
-  }
-
-
+  // message.payloadString: transProp/post/funnel/
+  addMessage(message.destinationName.split('/')[2], message.payloadString, time);
 }
 
 });
+
+function addMessage(sensorId, message, timestamp) {
+  var messageHTML = '<div class="message"> \
+      <p class="timestamp text-right">' + timestamp  + '</p> \
+      <p class="body">' + message + '</p> \
+    </div>';
+
+  $('#' + sensorId + ' .message-list').prepend(messageHTML);
+  $('#combined .message-list').prepend(messageHTML);
+}
+
 </script>
 {% endblock %}
