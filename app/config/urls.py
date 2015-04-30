@@ -5,6 +5,7 @@ from django.conf import settings
 
 urlpatterns = [
     url(r'^$', 'dashboard.views.front_page'),
+    url(r'^draft/', 'dashboard.views.draft_page'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'api/', include('config.api_urls')),
 

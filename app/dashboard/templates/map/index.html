@@ -1,0 +1,51 @@
+{% extends "dash_base.html" %}
+{% load staticfiles %}
+{% load ui %}
+
+{% block title %}Map{% endblock %}
+
+
+
+  {% block nav %}
+  <li><a href="">Qualia-Urban</a></li>
+  {% endblock %}
+
+
+
+{% block rightnav %}
+<li><a href="http://mediacity.i-dat.org">MediaCity 5</a></li>
+<li><a href="/draft/">API Draft</a></li>
+<li><a href="mailto:support@qualia.org.uk">Contact</a></li>
+<li><a href="https://github.com/i-dat-qualia">GitHub</a></li>
+{% endblock %}
+
+{% block content %}
+
+<div id="map-canvas">
+
+</div>
+
+
+{% endblock %}
+
+{% block pageScripts %}
+<style>
+body { padding-top: 0px;}
+</style>
+
+<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.6.0/mapbox-gl.css' rel='stylesheet' />
+<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.6.0/mapbox-gl.js'></script>
+
+<script>
+// Sign up to get an access token
+mapboxgl.accessToken = 'pk.eyJ1IjoidGhpc2lzdGhlY2hyaXMiLCJhIjoiWGtjZnRXMCJ9.DJPpDDWnqux6wsFHStG_mQ';
+// Create a map in the div #map
+new mapboxgl.Map({
+  container: 'map-canvas',
+  style: 'https://www.mapbox.com/mapbox-gl-styles/styles/outdoors-v7.json', //stylesheet location
+  center: [50.3750391347, -4.13879066706], // starting position
+  zoom: 14 // starting zoom
+});
+</script>
+
+{% endblock %}
