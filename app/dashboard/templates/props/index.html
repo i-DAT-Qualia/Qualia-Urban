@@ -35,15 +35,15 @@
 <!--               <ul class="list-group">
                 <li class="list-group-item message">
                   <p class="timestamp text-right">15:40:37</p>
-                  <p class="body">Tilt  HIGH #transactionalprops</p>  
+                  <p class="body">Tilt  HIGH #transactionalprops</p>
                 </li>
                 <li class="list-group-item message">
                   <p class="timestamp text-right">15:40:37</p>
-                  <p class="body">Body of the message</p>  
+                  <p class="body">Body of the message</p>
                 </li>
                 <li class="list-group-item message">
                   <p class="timestamp text-right">15:40:37</p>
-                  <p class="body">Body of the message</p>  
+                  <p class="body">Body of the message</p>
                 </li>
               </ul> -->
 
@@ -53,13 +53,13 @@
                   <p class="body">Body of the message</p>
                   <!-- message -->
                 </div>
-  
+
                 <div class="message">
                   <p class="timestamp text-right">15:40:37</p>
                   <p class="body">Body of the message</p>
                   <!-- message -->
                 </div>
-  
+
                 <div class="message">
                   <p class="timestamp text-right">15:40:37</p>
                   <p class="body">Body of the message</p>
@@ -75,7 +75,7 @@
                 <hr>
               </div>
               <div class="message-list">
-                
+
               </div>
 
             </div>
@@ -87,7 +87,7 @@
               </div>
 
               <div class="message-list">
-                
+
               </div>
 
             </div>
@@ -99,7 +99,7 @@
               </div>
 
               <div class="message-list">
-                
+
               </div>
 
             </div>
@@ -111,7 +111,7 @@
               </div>
 
               <div class="message-list">
-                
+
               </div>
 
             </div>
@@ -123,7 +123,7 @@
               </div>
 
               <div class="message-list">
-                
+
               </div>
 
             </div>
@@ -135,7 +135,7 @@
               </div>
 
               <div class="message-list">
-                
+
               </div>
 
             </div>
@@ -152,7 +152,7 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
-  }  
+  }
 
   .colheader h4 {
     text-align: center;
@@ -226,6 +226,36 @@ function onConnectionLost(responseObject) {
 function onMessageArrived(message) {
   console.log("onMessageArrived:"+message.payloadString);
   console.log("onMessageArrived:"+message.destinationName);
+
+  if(message.destinationName == "transProp/post/funnel/"){
+
+  }
+
+  if(message.destinationName == "transProp/post/greencutter/"){
+
+  }
+
+  if(message.destinationName == "transProp/post/orangecutter/"){
+
+  }
+
+  if(message.destinationName == "transProp/post/nozzletip/"){
+
+  }
+
+  if(message.destinationName == "transProp/post/greenglass/"){
+
+  }
+
+  if(message.destinationName == "transProp/post/pinkglass/"){
+
+  }
+
+  if(message.destinationName == "transProp/post/flatnozzle/"){
+
+  }
+
+
 }
 
 });
