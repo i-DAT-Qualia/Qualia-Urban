@@ -66,7 +66,7 @@ var map = L.mapbox.map('map-canvas', 'thisisthechris.m2d80o9h',{
 {% for photo in photos %}
   {% if photo.gps %}
 
-  popupContent = '<a href="{{STATIC_URL}}{{photo.image}}"><img src="{{STATIC_URL}}{{photo.image}}"></a>';
+  popupContent = '<a href="{{STATIC_URL}}{{photo.image}}"><img src="{{STATIC_URL}}{{photo.large}}"></a>';
 
   var myIcon = L.icon({
   iconUrl: '{{STATIC_URL}}{{photo.thumb}}',
