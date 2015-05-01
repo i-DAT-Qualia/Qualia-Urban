@@ -66,10 +66,11 @@ var map = L.mapbox.map('map-canvas', 'thisisthechris.m2d80o9h',{
 {% for photo in photos %}
   {% if photo.gps %}
 
-  popupContent = '<a href="{{STATIC_URL}}{{photo.image}}"><img src="{{STATIC_URL}}{{photo.large}}"></a>';
+  popupContent = '<a href="{{STATIC_URL}}{{photo.image}}"><img src="{{STATIC_URL}}{{photo.image}}"></a>';
 
   var myIcon = L.icon({
   iconUrl: '{{STATIC_URL}}{{photo.thumb}}',
+  "iconSize": [32, 22],
 });
 
     L.marker([{{photo.gps.y}}, {{photo.gps.x}}],{icon: myIcon}).bindPopup(popupContent).addTo(map);
