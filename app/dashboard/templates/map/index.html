@@ -58,8 +58,21 @@ var map = L.mapbox.map('map-canvas', 'thisisthechris.m2d80o9h',{
 {% for device in devices %}
   {% if device.last_location %}
 
-  popupContent = '<a href="/dashboard/content/devices/{{device.id}}/"><h3>{{device.name}}</h3></a>';
+  popupContent = '<a href="/dashboard/content/devices/{{device.id}}/"><h3>Device: {{device.name}}</h3></a>';
     L.marker([{{device.last_location.gps.y}}, {{device.last_location.gps.x}}]).bindPopup(popupContent).addTo(map);
+  {% endif %}
+{% endfor %}
+
+{% for photo in photos %}
+  {% if photo.gps %}
+
+  popupContent = '<a href="{{STATIC_URL}}{{photo.image}}"><img src="{{STATIC_URL}}{{photo.large}}"></a>';
+
+  var myIcon = L.icon({
+  iconUrl: '{{STATIC_URL}}{{photo.thumb}}',
+});
+
+    L.marker([{{photo.gps.y}}, {{photo.gps.x}}],{icon: myIcon}).bindPopup(popupContent).addTo(map);
   {% endif %}
 {% endfor %}
 
