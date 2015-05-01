@@ -41,7 +41,7 @@ class Channel(SensorMeta):
         return self.name
 
     def reading_list(self):
-        return Reading.objects.filter(channel=self).order_by('-added')[:5]
+        return Reading.objects.filter(channel=self).order_by('-added')
 
 
 class Reading(models.Model):

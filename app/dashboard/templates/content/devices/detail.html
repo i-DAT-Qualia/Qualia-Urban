@@ -69,13 +69,23 @@
           </div>
           <div class="tab-pane" id="channels">
 
+            <link href="{{STATIC_URL}}libs/c3/c3.css" rel="stylesheet" type="text/css">
+
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.3/d3.min.js" charset="utf-8"></script>
+            <script src="{{STATIC_URL}}libs/c3/c3.js"></script>
+
 
             {% for channel in device.channel_list %}
             <div class="row">
+
+
               <div class="col-md-12">
                 <h3>{{channel.name}}</h3>
                 <p>ID: {{channel.id}}</p>
-            <table class="table table-hover">
+
+                <div id="{{channel.name|cut:" "}}"></div>
+
+            <!--table class="table table-hover">
             <thead>
                 <tr>
                   <th>Added</th>
@@ -91,7 +101,7 @@
             {% endfor %}
 
               </tbody>
-          </table>
+          </table>-->
         </div>
       </div>
 
@@ -141,5 +151,54 @@
 </div>
 </div>
 
+
+{% endblock %}
+
+{% block pageScripts %}
+<link href="{{STATIC_URL}}libs/c3/c3.css" rel="stylesheet" type="text/css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.3/d3.min.js" charset="utf-8"></script>
+<script src="{{STATIC_URL}}libs/c3/c3.js"></script>
+
+<script type="text/javascript">
+var charts = [];
+
+{% for channel in device.channel_list %}
+
+charts.push(c3.generate({
+  bindto: '#{{channel.name|cut:" "}}',
+    data: {
+        x: 'x',
+//        xFormat: '%Y%m%d', // 'xFormat' can be used as custom format of 'x'
+        xFormat : '%Y-%m-%d %H:%M:%S',
+        columns: [
+            //['x', '2015-01-01', '2015-01-02', '2015-01-03', '2015-01-04', '2015-01-05', '2015-01-06'],
+            ['x', {% for reading in channel.reading_list%}'{{reading.added|date:"Y-m-d H:i:s"}}',{% endfor%}],
+            ['Value', {% for reading in channel.reading_list %}{{reading.value}},{% endfor%}],
+        ],
+        //type: "bar"
+
+    },
+    axis: {
+        x: {
+            type: 'timeseries',
+            tick: {
+                format: '%Y-%m-%d %H:%M:%S',
+                show: false,
+                //rotate: 45,
+                count: 5,
+            }
+        },
+        y: {
+          label: 'Value',
+          position: 'outer-middle'
+        }
+    },
+    size: {
+      height: 340
+    }
+}));
+{% endfor %}
+</script>
 
 {% endblock %}
