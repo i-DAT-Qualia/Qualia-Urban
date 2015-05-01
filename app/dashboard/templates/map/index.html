@@ -55,7 +55,15 @@ var map = L.mapbox.map('map-canvas', 'thisisthechris.m2d80o9h',{
   zoomControl: false
 }).setView([50.372, -4.142], 15);
 
-map.addControl(L.mapbox.infoControl().addInfo('This project is an extension of the Qualia project which aims to allow a Qualia Engine to handle many more different types of data. It is initially being developed for the upcoming MediaCities conference along with collaborators in DAT 203.'));
+{% for device in devices %}
+  {% if device.last_location %}
+
+  popupContent = '<a href="/dashboard/content/devices/{{device.id}}/"><h3>{{device.name}}</h3></a>';
+    L.marker([{{device.last_location.gps.y}}, {{device.last_location.gps.x}}]).bindPopup(popupContent).addTo(map);
+  {% endif %}
+{% endfor %}
+
+//map.addControl(L.mapbox.infoControl().addInfo('This project is an extension of the Qualia project which aims to allow a Qualia Engine to handle many more different types of data. It is initially being developed for the upcoming MediaCities conference along with collaborators in DAT 203.'));
 })
 </script>
 

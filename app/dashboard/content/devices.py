@@ -32,10 +32,11 @@ class LocationUpdateForm(ModelForm):
 
 
 def can_edit(thing, user):
-    if (user.level >= 4) or (thing.owner == user):
-        return True
-    else:
-        return False
+    if not user.is_anonymous():
+        if (user.level >= 4) or (thing.owner == user):
+            return True
+
+    return False
 
 
 @dashboard_level_required
@@ -46,7 +47,7 @@ def list(request):
     }, context_instance=RequestContext(request))
 
 
-@dashboard_level_required
+# @dashboard_level_required
 def detail(request, id):
     device = get_object_or_404(Thing, id=id)
     channel = Channel.objects.filter(thing=device).order_by('-added')

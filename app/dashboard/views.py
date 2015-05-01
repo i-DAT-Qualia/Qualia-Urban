@@ -8,6 +8,7 @@ from django.shortcuts import render_to_response, get_object_or_404, redirect
 from django.utils import timezone
 
 from sensors.models import *
+#from media.models import *
 
 import numpy
 import datetime
@@ -18,6 +19,8 @@ from qualia.tools.decorators import dashboard_level_required
 
 def front_page(request):
     return render_to_response('map/index.html', {
+        "devices": Thing.objects.all(),
+        #"photos": Photo.objects.all()
     }, context_instance=RequestContext(request))
 
 

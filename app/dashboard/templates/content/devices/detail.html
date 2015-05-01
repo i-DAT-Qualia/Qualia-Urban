@@ -6,7 +6,11 @@
 {% block title %}Device: {{device.name}}{% endblock %}
 
 {% block nav %}
+    {% if user.is_authenticated %}
     {% show_menu 'Device: '|add:device.name user%}
+    {% else %}
+    <li><a href="">Device: {{device.name}}</a></li>
+    {% endif %}
 {% endblock %}
 
 {% block rightnav %}
@@ -123,8 +127,8 @@
           <div class="tab-pane" id="api">
             <div class="row">
               <div class="col-md-12">
-                <h3>To access this device's data through the Urban API, send a GET Request to:</h3>
-                <code>http://urban.qualia.org.uk/api/v3/device/{{device.id}}/?api_key={{user.get_api_key}}</code>
+                <p>To access this device's data through the Urban API, send a GET Request to:</p>
+                <code>http://urban.qualia.org.uk/api/v3/device/{{device.id}}/?api_key=YOUR_KEY</code>
 
               </div>
             </div>
