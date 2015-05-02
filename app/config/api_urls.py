@@ -15,6 +15,7 @@ v3_api.register(ReadingList())
 v3_api.register(LocationList())
 v3_api.register(DocumentList())
 v3_api.register(PhotoList())
+v3_api.register(FileLinkList())
 
 urlpatterns = [
 

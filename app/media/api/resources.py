@@ -32,9 +32,28 @@ class PhotoList(ModelResource):
         always_return_data = True
         detail_uri_name = 'id'
 
-        #filtering = {
-        #    'name': ALL,
-        #}
+        filtering = {
+            'tag': ALL,
+        }
+
+    def dehydrate_tags(self, bundle):
+        return bundle.obj.tags
+
+
+class FileLinkList(ModelResource):
+
+    class Meta:
+        queryset = FileLink.objects.all()
+        resource_name = 'file'
+        allowed_methods = ['get']
+        authentication = KeyOnlyAuthentication()
+        authorization = DjangoAuthorization()
+        always_return_data = True
+        detail_uri_name = 'id'
+
+        filtering = {
+            'tag': ALL,
+        }
 
     def dehydrate_tags(self, bundle):
         return bundle.obj.tags
