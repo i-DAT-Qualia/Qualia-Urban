@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'django.contrib.gis',
     'django.contrib.postgres',
     'tastypie',
+    'imagekit',
     'leaflet',
     'provider',
     'provider.oauth2',
