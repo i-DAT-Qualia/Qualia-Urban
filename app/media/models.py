@@ -42,3 +42,10 @@ class Photo(MediaMeta):
 
     def __unicode__(self):
         return str(self.id)
+
+
+class FileLink(MediaMeta):
+    link = models.URLField(blank=True, null=True)
+
+    def __unicode__(self):
+        return str(self.link)

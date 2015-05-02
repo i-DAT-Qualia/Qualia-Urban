@@ -6,3 +6,4 @@ class MetaAdmin(admin.OSMGeoAdmin):
     search_fields = ['id']
 
 admin.site.register(Photo, MetaAdmin)
+admin.site.register(FileLink, MetaAdmin)
