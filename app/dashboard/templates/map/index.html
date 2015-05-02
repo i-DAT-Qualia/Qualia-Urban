@@ -63,6 +63,14 @@ var map = L.mapbox.map('map-canvas', 'thisisthechris.m2d80o9h',{
   {% endif %}
 {% endfor %}
 
+{% for link in links %}
+  {% if link.gps %}
+
+  popupContent = '<a href="{{link.link}}"><h3>Link: {{link.link}}</h3></a>';
+    L.marker([{{link.gps.y}}, {{link.gps.x}}]).bindPopup(popupContent).addTo(map);
+  {% endif %}
+{% endfor %}
+
 {% for photo in photos %}
   {% if photo.gps %}
 

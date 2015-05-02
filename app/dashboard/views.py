@@ -20,7 +20,8 @@ from qualia.tools.decorators import dashboard_level_required
 def front_page(request):
     return render_to_response('map/index.html', {
         "devices": Thing.objects.all(),
-        "photos": Photo.objects.all()
+        "photos": Photo.objects.all(),
+        "links": FileLink.objects.all()
     }, context_instance=RequestContext(request))
 
 
