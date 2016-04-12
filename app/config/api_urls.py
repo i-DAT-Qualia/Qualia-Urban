@@ -17,17 +17,20 @@ v3_api.register(DocumentList())
 v3_api.register(PhotoList())
 v3_api.register(FileLinkList())
 
+import sensors.api.collectors
+import accounts.api.register
+
 urlpatterns = [
 
     # authentication
     url(r'^v2/auth/', include('provider.oauth2.urls', namespace='oauth2')),
-    url(r'^v2/register/', 'accounts.api.register.register_user'),
-    url(r'^v2/login/', 'accounts.api.register.login_user'),
-    url(r'^v2/logout/', 'accounts.api.register.logout_user'),
+    url(r'^v2/register/', accounts.api.register.register_user),
+    url(r'^v2/login/', accounts.api.register.login_user),
+    url(r'^v2/logout/', accounts.api.register.logout_user),
 
     # API Collectors
-    url(r'^v3/collector/reading/', 'sensors.api.collectors.collect_reading'),
-    url(r'^v3/collector/location/', 'sensors.api.collectors.collect_location'),
+    url(r'^v3/collector/reading/', sensors.api.collectors.collect_reading),
+    url(r'^v3/collector/location/', sensors.api.collectors.collect_location),
 
 
     # Tastypie API
