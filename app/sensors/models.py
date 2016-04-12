@@ -36,6 +36,7 @@ class Thing(SensorMeta):
 
 class Channel(SensorMeta):
     thing = models.ForeignKey(Thing)
+    mqtt = models.CharField(null=True, blank=True, max_length=250)
 
     def __unicode__(self):
         return self.name

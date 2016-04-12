@@ -159,6 +159,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.3/d3.min.js" charset="utf-8"></script>
 <script src="{{STATIC_URL}}libs/c3/c3.js"></script>
+<script src="{{STATIC_URL}}js/mqttws31.js"></script>
 
 <script type="text/javascript">
 var charts = [];
@@ -199,6 +200,53 @@ charts.push(c3.generate({
     }
 }));
 {% endfor %}
+
+$( document ).ready(function() {
+// Create a client instance
+randomnumber = Math.floor(Math.random()*111213123123132)
+client = new Paho.MQTT.Client("broker.i-dat.org", 8000,"","clientId" + randomnumber);
+
+// set callback handlers
+client.onConnectionLost = onConnectionLost;
+client.onMessageArrived = onMessageArrived;
+
+// connect the client
+connectOptions = {keepAliveInterval:600000, onSuccess:onConnect}
+
+client.connect(connectOptions);
+
+// called when the client connects
+function onConnect() {
+  // Once a connection has been made, make a subscription and send a message.
+  console.log("onConnect");
+
+  {% for channel in device.channel_list %}
+    {% if channel.mqtt %}
+    client.subscribe("{{channel.mqtt}}");
+    {% endif %}
+  {%endfor%}
+
+}
+
+// called when the client loses its connection
+function onConnectionLost(responseObject) {
+  if (responseObject.errorCode !== 0) {
+    console.log("onConnectionLost:"+responseObject.errorMessage);
+  }
+}
+
+// called when a message arrives
+function onMessageArrived(message) {
+  console.log("onMessageArrived:"+message.payloadString);
+  console.log("onMessageArrived:"+message.destinationName);
+
+  var date = new Date();
+  var time = date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
+}
+
+});
+
+
 </script>
 
 {% endblock %}
