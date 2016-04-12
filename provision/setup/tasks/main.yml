@@ -1,3 +1,7 @@
+- name: Add Postgres Repo
+  sudo: yes
+  apt_repository: repo='deb-src http://apt.postgresql.org/pub/repos/apt/ jessie-pgdg main' state=present
+
 - name: Install packages
   sudo: yes
   apt: pkg={{ item }} state=installed update_cache=yes
@@ -8,6 +12,7 @@
       - python-psycopg2 # Required for Ansible to interact with postgres
       - postgresql-server-dev-all
       - postgresql-contrib
+      - postgis
 
       # Python Dev
       - python-dev
@@ -30,8 +35,8 @@
       - build-essential
 
       # Pillow
-      - libtiff4-dev
-      - libjpeg8-dev
+      - libtiff-dev
+      - libjpeg-dev
       - zlib1g-dev
       - libfreetype6-dev
       - liblcms2-dev
@@ -42,19 +47,10 @@
 
       # Datd
       - libxslt-dev
-      
-
-- name: Enable Build
-  sudo: yes
-  shell: chmod 755 /vagrant/provision/setup/files/build_postgis.sh
-
-- name: Build Postgis
-  sudo: yes
-  shell: /vagrant/provision/setup/files/build_postgis.sh
 
 - name: Allow password authentication for local socket users
   sudo: yes
-  copy: src=pg_hba.conf dest=/etc/postgresql/9.1/main/pg_hba.conf force=yes
+  copy: src=pg_hba.conf dest=/etc/postgresql/9.4/main/pg_hba.conf force=yes
   notify:
       - Restart Postgres
 
@@ -91,6 +87,10 @@
   sudo: yes
   sudo_user: postgres
   command: psql -d {{ db_name }} -c "CREATE EXTENSION hstore;"
+
+- name: Upgrade pip
+  sudo: yes
+  shell: pip install --upgrade pip
 
 - name: Setup Virtualenv
   sudo: yes
