@@ -49,7 +49,8 @@ INSTALLED_APPS = (
     'sensors',
     'documents',
     'dashboard',
-    'media'
+    'media',
+    'trees'
 )
 
 AUTH_USER_MODEL = 'accounts.QualiaUser'
