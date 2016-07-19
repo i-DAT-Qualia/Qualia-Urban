@@ -11,6 +11,7 @@ import dashboard.urls
 
 urlpatterns = [
     url(r'^$', dashboard.views.front_page),
+    url(r'^trees/', dashboard.views.tree_map),
     url(r'^draft/', dashboard.views.draft_page),
     url(r'^props/', dashboard.views.props_page),
     url(r'^admin/', include(admin.site.urls)),
