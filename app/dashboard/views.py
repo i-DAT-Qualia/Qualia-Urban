@@ -9,6 +9,7 @@ from django.utils import timezone
 
 from sensors.models import *
 from media.models import *
+from trees.models import *
 
 import numpy
 import datetime
@@ -22,6 +23,12 @@ def front_page(request):
         "devices": Thing.objects.all(),
         "photos": Photo.objects.all(),
         "links": FileLink.objects.all()
+    }, context_instance=RequestContext(request))
+
+
+def tree_map(request):
+    return render_to_response('map/trees.html', {
+        "trees": Tree.objects.all(),
     }, context_instance=RequestContext(request))
 
 

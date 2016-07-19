@@ -1,0 +1,69 @@
+{% extends "dash_base.html" %}
+{% load staticfiles %}
+{% load ui %}
+
+{% block title %}Plymouth Trees{% endblock %}
+
+
+
+  {% block nav %}
+  <li><a href="">Plymouth Trees</a></li>
+  {% endblock %}
+
+
+
+{% block rightnav %}
+<!--<li><a href="http://mediacity.i-dat.org">MediaCity 5</a></li>
+<li><a href="/draft/">API Draft</a></li>
+<li><a href="https://github.com/i-dat-qualia">GitHub</a></li>-->
+{% endblock %}
+
+{% block content %}
+
+<div id="map-canvas">
+
+</div>
+
+
+{% endblock %}
+
+{% block pageScripts %}
+<style>
+body { padding-top: 0px;}
+.uv-icon{display:none;}
+
+</style>
+
+<script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.9/mapbox.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.9/mapbox.css' rel='stylesheet' />
+
+
+
+<script>
+$( document ).ready(function() {
+// Sign up to get an access token
+L.mapbox.accessToken = 'pk.eyJ1IjoidGhpc2lzdGhlY2hyaXMiLCJhIjoiWGtjZnRXMCJ9.DJPpDDWnqux6wsFHStG_mQ';
+// Create a map in the div #map
+/*L.mapbox.Map({
+  container: 'map-canvas',
+  ///style: 'https://www.mapbox.com/mapbox-gl-styles/styles/outdoors-v7.json', //stylesheet location
+  center: [50.3750391347, -4.13879066706], // starting position
+  zoom: 14 // starting zoom
+});*/
+var map = L.mapbox.map('map-canvas', 'thisisthechris.m2d80o9h',{
+  zoomControl: false
+}).setView([50.372, -4.142], 15);
+
+{% for tree in trees %}
+  {% if tree.gps %}
+
+  popupContent = '<a href="{{tree.link}}"><h3>{{tree.name}}</h3></a>';
+  L.marker([{{tree.gps.y}}, {{tree.gps.x}}]).bindPopup(popupContent).addTo(map);
+  {% endif %}
+{% endfor %}
+
+//map.addControl(L.mapbox.infoControl().addInfo('This project is an extension of the Qualia project which aims to allow a Qualia Engine to handle many more different types of data. It is initially being developed for the upcoming MediaCities conference along with collaborators in DAT 203.'));
+})
+</script>
+
+{% endblock %}
