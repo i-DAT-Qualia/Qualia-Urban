@@ -7,15 +7,17 @@
 
 
   {% block nav %}
-  <li><a href="">Plymouth Trees</a></li>
+  <li><a href="#" onclick="switchPitch()">Plymouth Trees</a></li>
   {% endblock %}
 
 
 
 {% block rightnav %}
 <!--<li><a href="http://mediacity.i-dat.org">MediaCity 5</a></li>
-<li><a href="/draft/">API Draft</a></li>
-<li><a href="https://github.com/i-dat-qualia">GitHub</a></li>-->
+<li><a href="/draft/">API Draft</a></li>-->
+<li><a href="https://github.com/i-dat-qualia">Species: All</a></li>
+<li><a href="https://github.com/i-dat-qualia">Dataset: All</a></li>
+<li><a href="https://github.com/i-dat-qualia">Add Tree</a></li>
 {% endblock %}
 
 {% block content %}
@@ -25,45 +27,59 @@
 </div>
 
 
+<div id="tree-modal" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="modal-name">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        <p id="modal-info">One fine body&hellip;</p>
+      </div>
+      <div class="modal-footer">
+        <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>-->
+
+
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
 {% endblock %}
 
 {% block pageScripts %}
 <style>
-body { padding-top: 0px;}
-.uv-icon{display:none;}
+/*body { padding-top: 0px;}*/
 
 </style>
 
-<script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.9/mapbox.js'></script>
-<link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.9/mapbox.css' rel='stylesheet' />
+<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.21.0/mapbox-gl.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.21.0/mapbox-gl.css' rel='stylesheet' />
+
+<!--<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v1.3.0/mapbox-gl-geocoder.js'></script>
+<link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v1.3.0/mapbox-gl-geocoder.css' type='text/css' />-->
 
 
+<script src="{{STATIC_URL}}js/treemap.js"></script>
 
 <script>
-$( document ).ready(function() {
-// Sign up to get an access token
-L.mapbox.accessToken = 'pk.eyJ1IjoidGhpc2lzdGhlY2hyaXMiLCJhIjoiWGtjZnRXMCJ9.DJPpDDWnqux6wsFHStG_mQ';
-// Create a map in the div #map
-/*L.mapbox.Map({
-  container: 'map-canvas',
-  ///style: 'https://www.mapbox.com/mapbox-gl-styles/styles/outdoors-v7.json', //stylesheet location
-  center: [50.3750391347, -4.13879066706], // starting position
-  zoom: 14 // starting zoom
-});*/
-var map = L.mapbox.map('map-canvas', 'thisisthechris.m2d80o9h',{
-  zoomControl: false
-}).setView([50.372, -4.142], 15);
+//$( document ).ready(function() {
 
-{% for tree in trees %}
-  {% if tree.gps %}
+// Set orientation to user's bearing
+  /*
+    if (window.DeviceOrientationEvent) {
+        //map.setZoom(16);
+        window.addEventListener('deviceorientation', function(event) {
+            var orientation = -event.alpha;
+            map.setBearing(orientation);
+        });
+    }
+    */
 
-  popupContent = '<a href="{{tree.link}}"><h3>{{tree.name}}</h3></a>';
-  L.marker([{{tree.gps.y}}, {{tree.gps.x}}]).bindPopup(popupContent).addTo(map);
-  {% endif %}
-{% endfor %}
 
-//map.addControl(L.mapbox.infoControl().addInfo('This project is an extension of the Qualia project which aims to allow a Qualia Engine to handle many more different types of data. It is initially being developed for the upcoming MediaCities conference along with collaborators in DAT 203.'));
-})
+//})
 </script>
 
 {% endblock %}

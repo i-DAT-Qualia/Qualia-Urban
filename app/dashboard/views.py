@@ -28,7 +28,7 @@ def front_page(request):
 
 def tree_map(request):
     return render_to_response('map/trees.html', {
-        "trees": Tree.objects.all(),
+        #"trees": Tree.objects.all(),
     }, context_instance=RequestContext(request))
 
 
