@@ -14,6 +14,7 @@ from imagekit.processors import Thumbnail, ResizeToFit
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
+import pusher
 
 class TreesMeta(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -22,7 +23,7 @@ class TreesMeta(models.Model):
     added = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     updated = models.DateTimeField(auto_now=True, blank=True, null=True)
     tags = ArrayField(models.CharField(max_length=200), blank=True, null=True)
-    data = JSONField()
+    data = JSONField(blank=True, null=True)
 
     class Meta:
         abstract = True
@@ -64,6 +65,19 @@ class Tree(TreesMeta):
 
     def __unicode__(self):
         return self.name
+
+
+@receiver(post_save, sender=Tree, dispatch_uid="refresh_tree_data")
+def update_stock(sender, instance, **kwargs):
+    pusher_client = pusher.Pusher(
+        app_id='228273',
+        key='69fd7ece64cc89e58187',
+        secret='0d766ecef1bd29ef8ae3',
+        cluster='eu',
+        ssl=True
+    )
+
+    pusher_client.trigger('refresh_tree_data', 'refresh_tree_data_now', {})
 
 
 class DataPoint(models.Model):

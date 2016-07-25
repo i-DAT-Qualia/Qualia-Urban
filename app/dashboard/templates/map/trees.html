@@ -52,6 +52,7 @@
 {% block pageScripts %}
 <style>
 /*body { padding-top: 0px;}*/
+body { padding-top: 0px;}
 
 </style>
 
@@ -62,6 +63,7 @@
 <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v1.3.0/mapbox-gl-geocoder.css' type='text/css' />-->
 
 
+<script src="https://js.pusher.com/3.1/pusher.min.js"></script>
 <script src="{{STATIC_URL}}js/treemap.js"></script>
 
 <script>
@@ -80,6 +82,16 @@
 
 
 //})
+
+var pusher = new Pusher('69fd7ece64cc89e58187', {
+      cluster: 'eu',
+      encrypted: true
+    });
+
+    var channel = pusher.subscribe('refresh_tree_data');
+    channel.bind('refresh_tree_data_now', function(data) {
+      tree_source.setData(data_url);
+    });
 </script>
 
 {% endblock %}
