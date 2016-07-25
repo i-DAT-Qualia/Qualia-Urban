@@ -1,0 +1,294 @@
+{% extends "dash_base.html" %}
+{% load staticfiles %}
+{% load ui %}
+{% load leaflet_tags %}
+
+{% block title %}Tree: {{tree.name}}{% endblock %}
+
+{% block nav %}
+    <li><a href="">Tree: {{tree.name}}</a></li>
+{% endblock %}
+
+{% block rightnav %}
+<li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Actions<span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="/trees/{{tree.id}}/add/photo/">Add Photo</a></li>
+            <li><a href="/trees/{{tree.id}}/add/reading/">Add Reading</a></li>
+            <li><a href="/trees/{{tree.id}}/add/report/">Add Report</a></li>
+            <li><a href="/trees/{{tree.id}}/add/story/">Add Story</a></li>
+            <!--<li class="divider"></li>
+            <li><a href="/dashboard/content/trees/{{tree.id}}/edit/">Edit tree</a></li>
+          -->
+          </ul>
+        </li>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+      <div class="row">
+      <div class="col-md-12">
+        <h2>Overview</h2>
+        <hr>
+      </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-7">
+        <script type="text/javascript">
+            function map_init_basic (map, options) {
+                L.marker([{{tree.gps.y}},{{tree.gps.x}}]).addTo(map);
+                map.setView([{{tree.gps.y}}, {{tree.gps.x}}], 16);
+            }
+        </script>
+        {% leaflet_map "venuemap" callback="window.map_init_basic" %}
+
+        </div>
+        <div class="col-md-5">
+          <h3>Species: {{tree.species}}</h3>
+          <h3>Dataset: {{tree.dataset}}</h3>
+          <h3>Org: {{tree.org}}</h3>
+          <h3>Est. Age: {{tree.age}}</h3>
+          <h3>Info:</h3>
+          <p>{{tree.info}}</p>
+          <!--<h3>Tags:</h3>
+          <ul>
+            {%for tag in tree.tags%}
+            <li>{{tag}}</li>
+            {% endfor %}
+          </ul>
+        </div>-->
+    </div>
+
+    <div class="row">
+    <div class="col-md-12">
+      <h2>Photos</h2>
+      <hr>
+      {%for photo in photos%}
+      <a href="{{STATIC_URL}}{{photo.image}}"><img src="{{STATIC_URL}}{{photo.large}}"></a>
+      {%endfor%}
+    </div>
+  </div>
+
+  <div class="row">
+  <div class="col-md-12">
+    <h2>Height of Tree</h2>
+    <hr>
+    <div id="readings_A"></div>
+  </div>
+</div>
+
+<div class="row">
+<div class="col-md-12">
+  <h2>Spread of Crown</h2>
+  <hr>
+  <div id="readings_B"></div>
+</div>
+</div>
+
+<div class="row">
+<div class="col-md-12">
+  <h2>Diameter at Breast Height</h2>
+  <hr>
+  <div id="readings_C"></div>
+</div>
+</div>
+
+<div class="row">
+<div class="col-md-12">
+  <h2>Clear Stem Height</h2>
+  <hr>
+  <div id="readings_D"></div>
+</div>
+</div>
+
+<div class="row">
+<div class="col-md-12">
+  <h2>Reports</h2>
+  <hr>
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Added</th>
+        <th>Type</th>
+        <th>Report</th>
+        <th>Author</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for report in reports %}
+      <tr>
+        <td>{{report.added}}</td>
+        <td>{{report.get_type_display}}</td>
+        <td>{{report.info}}</td>
+        <td>{{report.author}}</td>
+      </tr>
+
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+</div>
+
+<div class="row">
+<div class="col-md-12">
+  <h2>Stories</h2>
+  <hr>
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Added</th>
+        <th>Report</th>
+        <th>Author</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for story in stories %}
+      <tr>
+        <td>{{story.added}}</td>
+        <td>{{story.info}}</td>
+        <td>{{story.author}}</td>
+      </tr>
+
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+</div>
+
+
+
+
+
+</div>
+
+
+{% endblock %}
+
+{% block pageScripts %}
+<link href="{{STATIC_URL}}libs/c3/c3.css" rel="stylesheet" type="text/css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.3/d3.min.js" charset="utf-8"></script>
+<script src="{{STATIC_URL}}libs/c3/c3.js"></script>
+
+<script type="text/javascript">
+var charts = [];
+
+charts.push(c3.generate({
+  bindto: '#readings_A',
+    data: {
+        x: 'x',
+        xFormat : '%Y-%m-%d %H:%M:%S',
+        url: '/trees/{{tree.id}}/readings/A/',
+        mimeType: 'json',
+
+    },
+    axis: {
+        x: {
+            type: 'timeseries',
+            tick: {
+                format: '%Y-%m-%d %H:%M:%S',
+                show: false,
+                count: 5,
+            }
+        },
+        y: {
+          label: 'Reading in Meters',
+          position: 'outer-middle'
+        }
+    },
+    size: {
+      height: 340
+    }
+}));
+
+charts.push(c3.generate({
+  bindto: '#readings_B',
+    data: {
+        x: 'x',
+        xFormat : '%Y-%m-%d %H:%M:%S',
+        url: '/trees/{{tree.id}}/readings/B/',
+        mimeType: 'json',
+
+    },
+    axis: {
+        x: {
+            type: 'timeseries',
+            tick: {
+                format: '%Y-%m-%d %H:%M:%S',
+                show: false,
+                count: 5,
+            }
+        },
+        y: {
+          label: 'Reading in Meters',
+          position: 'outer-middle'
+        }
+    },
+    size: {
+      height: 340
+    }
+}));
+
+charts.push(c3.generate({
+  bindto: '#readings_C',
+    data: {
+        x: 'x',
+        xFormat : '%Y-%m-%d %H:%M:%S',
+        url: '/trees/{{tree.id}}/readings/C/',
+        mimeType: 'json',
+
+    },
+    axis: {
+        x: {
+            type: 'timeseries',
+            tick: {
+                format: '%Y-%m-%d %H:%M:%S',
+                show: false,
+                count: 5,
+            }
+        },
+        y: {
+          label: 'Reading in Meters',
+          position: 'outer-middle'
+        }
+    },
+    size: {
+      height: 340
+    }
+}));
+
+charts.push(c3.generate({
+  bindto: '#readings_D',
+    data: {
+        x: 'x',
+        xFormat : '%Y-%m-%d %H:%M:%S',
+        url: '/trees/{{tree.id}}/readings/D/',
+        mimeType: 'json',
+
+    },
+    axis: {
+        x: {
+            type: 'timeseries',
+            tick: {
+                format: '%Y-%m-%d %H:%M:%S',
+                show: false,
+                count: 5,
+            }
+        },
+        y: {
+          label: 'Reading in Meters',
+          position: 'outer-middle'
+        }
+    },
+    size: {
+      height: 340
+    }
+}));
+
+
+</script>
+
+{% endblock %}

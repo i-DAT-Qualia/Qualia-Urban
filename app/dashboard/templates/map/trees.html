@@ -15,9 +15,9 @@
 {% block rightnav %}
 <!--<li><a href="http://mediacity.i-dat.org">MediaCity 5</a></li>
 <li><a href="/draft/">API Draft</a></li>-->
-<li><a href="https://github.com/i-dat-qualia">Species: All</a></li>
-<li><a href="https://github.com/i-dat-qualia">Dataset: All</a></li>
-<li><a href="https://github.com/i-dat-qualia">Add Tree</a></li>
+<!--<li><a href="https://github.com/i-dat-qualia">Species: All</a></li>
+<li><a href="https://github.com/i-dat-qualia">Dataset: All</a></li>-->
+<li><a href="/trees/add/">Add Tree</a></li>
 {% endblock %}
 
 {% block content %}
@@ -35,11 +35,24 @@
         <h4 class="modal-title" id="modal-name">Modal title</h4>
       </div>
       <div class="modal-body">
-        <p id="modal-info">One fine body&hellip;</p>
+
+        <div class="row">
+            <div class="col-md-6">
+              <img src="" id="modal-image" />
+              <p id="modal-image-info">No Image</p>
+            </div>
+            <div class="col-md-6">
+              <p>Species: <span id="modal-species"></span></p>
+              <p>Dataset: <span id="modal-dataset"></span></p>
+              <p>Org: <span id="modal-org"></span></p>
+              <p>Est. Age: <span id="modal-age"></span></p>
+              <p>Info:</p>
+              <p id="modal-info">{{tree.info}}</p>
+        </div>
       </div>
       <div class="modal-footer">
-        <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>-->
+        <a href="" id="modal-link"><button type="button" class="btn btn-default">More Info</button></a>
+        <!--<button type="button" class="btn btn-primary">Save changes</button>-->
 
 
       </div>
@@ -51,7 +64,6 @@
 
 {% block pageScripts %}
 <style>
-/*body { padding-top: 0px;}*/
 body { padding-top: 0px;}
 
 </style>
@@ -61,7 +73,6 @@ body { padding-top: 0px;}
 
 <!--<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v1.3.0/mapbox-gl-geocoder.js'></script>
 <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v1.3.0/mapbox-gl-geocoder.css' type='text/css' />-->
-
 
 <script src="https://js.pusher.com/3.1/pusher.min.js"></script>
 <script src="{{STATIC_URL}}js/treemap.js"></script>

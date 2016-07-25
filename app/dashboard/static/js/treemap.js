@@ -1,5 +1,8 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoidGhpc2lzdGhlY2hyaXMiLCJhIjoiWGtjZnRXMCJ9.DJPpDDWnqux6wsFHStG_mQ';
 
+var data_url = "/trees/geojson/";
+var tree_source = new mapboxgl.GeoJSONSource({data:data_url});
+
 var map = new mapboxgl.Map({
   container: 'map-canvas',
   //style: 'mapbox://styles/thisisthechris/ciqwhdhhb0010h9nplbeb0oja',
@@ -7,14 +10,27 @@ var map = new mapboxgl.Map({
   //zoomControl: false,
   center: [-4.142, 50.372],
   zoom: 12,
-  pitch: 60, // pitch in degrees
+  pitch: 0, // pitch in degrees
   bearing: 0, // bearing in degrees
 });
 
 function get_tree_data(id){
-  $.getJSON( "/trees/json/"+id+"/", function( data ) {
+  $.getJSON( "/trees/"+id+"/json/", function( data ) {
+        console.log(data)
         $('#modal-name').html(data["name"]);
         $('#modal-info').html(data["info"]);
+        $('#modal-species').html(data["species"]["name"]);
+        $('#modal-dataset').html(data["dataset"]["name"]);
+        $('#modal-org').html(data["org"]["name"]);
+        $('#modal-age').html(data["age"]);
+        $('#modal-link').attr("href", "/trees/"+id+"/");
+        if (data["photo"]){
+          $('#modal-image').attr("src", data["photo"]);
+          $('#modal-image-info').html("");
+        }else {
+          $('#modal-image').attr("src", "");
+          $('#modal-image-info').html("No Image");
+        }
 
   });
 }
@@ -32,8 +48,6 @@ map.on('load', function(){
   map.addControl(new mapboxgl.Navigation({position: 'bottom-left'}));
   map.addControl(new mapboxgl.Geolocate({position: 'bottom-left'}));
 
-
-  var tree_source = new mapboxgl.GeoJSONSource({data:"/trees/geojson/"});
   map.addSource("trees", tree_source);
 
   map.addLayer({

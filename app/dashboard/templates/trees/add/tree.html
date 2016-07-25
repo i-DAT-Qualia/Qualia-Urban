@@ -1,0 +1,99 @@
+{% extends "dash_base.html" %}
+{% load staticfiles %}
+{% load ui %}
+
+{% block title %}Add Tree{% endblock %}
+
+{% block nav %}
+<li><a href="">Add Tree</a></li>
+{% endblock %}
+
+{% block rightnav %}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+        <div class="row">
+                <div class="col-md-12">
+                  <form enctype="multipart/form-data" action="." method="post" class="form-horizontal">{% csrf_token %}
+
+                  <div class="form-group">
+                    <label for="id_name" class="col-sm-2 control-label">Name</label>
+                    {{ form.name.errors }}
+                    <div class="col-sm-10">
+                      {{form.name|addboot:"Write a descriptive name for the tree"}}
+                    </div>
+                   </div>
+
+                   <div class="form-group">
+                    <label for="id_info" class="col-sm-2 control-label">Info</label>
+                    {{ form.info.errors }}
+                    <div class="col-sm-10">
+                        {{form.info|addboot:"Add some useful descriptive information. Where is it? What condition is it in?"}}
+                    </div>
+                   </div>
+
+                   <div class="form-group">
+                     <label for="id_age" class="col-sm-2 control-label">Estimated Age</label>
+                     {{ form.age.errors }}
+                     <div class="col-sm-10">
+                       {{form.age|addboot:"What is the tree's estimated age?"}}
+                     </div>
+                    </div>
+
+                   <div class="form-group">
+ 	                <label for="id_species" class="col-sm-2 control-label">Species</label>
+ 	                {{ form.species.errors }}
+ 	                <div class="col-sm-10"><p class="help-block">What Species is this Tree?</p>
+ 	                    {{form.species|addcss:"form-control"}}
+ 	                </div>
+ 	              </div>
+
+                <div class="form-group">
+               <label for="id_dataset" class="col-sm-2 control-label">Dataset</label>
+               {{ form.dataset.errors }}
+               <div class="col-sm-10"><p class="help-block">What Dataset does this tree belong too?</p>
+                   {{form.dataset|addcss:"form-control"}}
+               </div>
+             </div>
+
+
+                <div class="form-group">
+                  <label for="id_org" class="col-sm-2 control-label">Org</label>
+                  {{ form.org.errors }}
+                  <div class="col-sm-10"><p class="help-block">Which Org is responsible for this tree?</p>
+                    {{form.org|addcss:"form-control"}}
+                  </div>
+                </div>
+
+                <div class="form-group">
+                 <label for="id_gps" class="col-sm-2 control-label">Location</label>
+                 {{ form.gps.errors }}
+                 <div class="col-sm-10">
+                   <p class="help-block">This is the pin-pointed location of the tree on the map. When the App is in a map view, this will be the pinned location of your venue on the map. It will start on the location of your device.</p>
+                     {{form.gps}}
+                 </div>
+                </div>
+
+
+
+
+                  <div class="form-group">
+	                <div class="col-sm-offset-2 col-sm-10">
+	                  <input type="submit" value="Add Tree" class="btn btn-lg btn-primary" />
+	                </div>
+	              </div>
+                </form>
+                </div>
+            </div>
+
+
+
+</div>
+</div>
+
+
+{% endblock %}
+
+{% block pageScripts %}
+{% endblock %}
