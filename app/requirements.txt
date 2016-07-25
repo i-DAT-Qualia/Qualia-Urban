@@ -24,3 +24,4 @@ pyzmq
 defusedxml
 lxml
 psycopg2==2.6.1
+pusher
