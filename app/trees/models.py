@@ -11,6 +11,8 @@ from qualia.tools.uploads import get_image_path
 from imagekit.models import ImageSpecField
 from imagekit.processors import Thumbnail, ResizeToFit
 
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 
 class TreesMeta(models.Model):
@@ -70,7 +72,7 @@ class DataPoint(models.Model):
 
     added = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     updated = models.DateTimeField(auto_now=True, blank=True, null=True)
-    recorded = models.DateTimeField()
+    recorded = models.DateTimeField(blank=True, null=True)
 
     author = models.CharField(blank=True, null=True, max_length=250, default="Anon.")
 
