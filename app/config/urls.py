@@ -5,16 +5,14 @@ from django.conf import settings
 
 import dashboard.views
 import accounts.views
-import trees.views
 import config.api_urls
 import registration.backends.default.urls
 import dashboard.urls
+import trees.urls
 
 urlpatterns = [
     url(r'^$', dashboard.views.front_page),
-    url(r'^trees/json/(?P<id>[^/]+)/', trees.views.return_tree_json),
-    url(r'^trees/geojson/', trees.views.return_geojson),
-    url(r'^trees/', dashboard.views.tree_map),
+    url(r'^trees/', include(trees.urls)),
     url(r'^draft/', dashboard.views.draft_page),
     url(r'^props/', dashboard.views.props_page),
     url(r'^admin/', include(admin.site.urls)),
