@@ -68,11 +68,13 @@
   </div>
 
   <div class="row">
-  <div class="col-md-4">
+
     {%for photo in photos%}
+      <div class="col-md-4">
     <a href="{{STATIC_URL}}{{photo.image}}"><img style="width:100%;" src="{{STATIC_URL}}{{photo.image}}"></a>
+    </div>
     {%endfor%}
-  </div>
+
 </div>
 
   <div class="row">
