@@ -189,7 +189,7 @@ def return_tree_json(request, id):
     photo = None
 
     if photos:
-        photo = settings.STATIC_URL + photos[0].image.url
+        photo = photos[0].image.url
 
     '''if not tree.org:
         tree.org.id = None
