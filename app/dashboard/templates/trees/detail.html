@@ -64,11 +64,16 @@
     <div class="col-md-12">
       <h2>Photos</h2>
       <hr>
-      {%for photo in photos%}
-      <a href="{{STATIC_URL}}{{photo.image}}"><img src="{{STATIC_URL}}{{photo.large}}"></a>
-      {%endfor%}
     </div>
   </div>
+
+  <div class="row">
+  <div class="col-md-4">
+    {%for photo in photos%}
+    <a href="{{STATIC_URL}}{{photo.image}}"><img style="width:100%;" src="{{{STATIC_URL}}{{photo.image}}"></a>
+    {%endfor%}
+  </div>
+</div>
 
   <div class="row">
   <div class="col-md-12">
