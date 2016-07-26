@@ -96,4 +96,34 @@
 {% endblock %}
 
 {% block pageScripts %}
+
+<script type="text/javascript">
+var glomap;
+
+
+function onLocationFound(e) {
+    L.circle(e.latlng, 5, {
+    color: 'red',
+    fillColor: '#f03',
+    fillOpacity: 0.5
+    }).addTo(glomap);
+    id_gps.value = "{\"type\":\"Point\",\"coordinates\":["+e.latlng.lng +","+e.latlng.lat+"]}";
+}
+
+function id_gps_map_callback (map, options) {
+    geodjango_id_gps.store_class = L.FieldStore;
+    geo = new L.GeometryField(geodjango_id_gps);
+    //geo.options.defaults = [50.5, 30.5];
+    console.log(geo);
+    console.log(geo.value);
+    geo.addTo(map);
+    console.log(map);
+    glomap = map;
+
+    map.locate({setView: true, maxZoom: 17});
+
+    map.on('locationfound', onLocationFound);
+
+}
+</script>
 {% endblock %}
