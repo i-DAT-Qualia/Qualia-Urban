@@ -6,6 +6,7 @@ import dashboard.views
 urlpatterns = [
     url(r'^$', dashboard.views.tree_map),
     url(r'^geojson/', trees.views.return_geojson),
+    url(r'^embed/', dashboard.views.tree_map_widget),
     url(r'^(?P<id>[^/]+)/json/', trees.views.return_tree_json),
     url(r'^(?P<id>[^/]+)/readings/(?P<type>[^/]+)/', trees.views.return_reading_chart),
     url(r'^(?P<id>[^/]+)/add/photo/', trees.views.add_photo),
