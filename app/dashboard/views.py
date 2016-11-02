@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.conf import settings
 from django.shortcuts import render_to_response, get_object_or_404, redirect
 from django.utils import timezone
+from django.views.decorators.clickjacking import xframe_options_exempt
 
 from sensors.models import *
 from media.models import *
@@ -32,6 +33,7 @@ def tree_map(request):
     }, context_instance=RequestContext(request))
 
 
+@xframe_options_exempt
 def tree_map_widget(request):
     return render_to_response('map/tree_widget.html', {
         # "trees": Tree.objects.all(),
