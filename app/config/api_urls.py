@@ -19,6 +19,7 @@ v3_api.register(FileLinkList())
 
 import sensors.api.collectors
 import accounts.api.register
+import airquality.api.collectors
 
 urlpatterns = [
 
@@ -31,6 +32,8 @@ urlpatterns = [
     # API Collectors
     url(r'^v3/collector/reading/', sensors.api.collectors.collect_reading),
     url(r'^v3/collector/location/', sensors.api.collectors.collect_location),
+
+    url(r'^v5/collector/reading/', airquality.api.collectors.collect_reading),
 
 
     # Tastypie API

@@ -50,7 +50,8 @@ INSTALLED_APPS = (
     'documents',
     'dashboard',
     'media',
-    'trees'
+    'trees',
+    'airquality'
 )
 
 AUTH_USER_MODEL = 'accounts.QualiaUser'
