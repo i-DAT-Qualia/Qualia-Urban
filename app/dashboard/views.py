@@ -33,6 +33,12 @@ def tree_map(request):
     }, context_instance=RequestContext(request))
 
 
+def aqs_map(request):
+    return render_to_response('map/aqs.html', {
+        # "trees": Tree.objects.all(),
+    }, context_instance=RequestContext(request))
+
+
 @xframe_options_exempt
 def tree_map_widget(request):
     return render_to_response('map/tree_widget.html', {

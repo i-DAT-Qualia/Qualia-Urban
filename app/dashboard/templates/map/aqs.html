@@ -1,0 +1,109 @@
+{% extends "dash_base.html" %}
+{% load staticfiles %}
+{% load ui %}
+
+{% block title %}AQS Alpha{% endblock %}
+
+
+
+  {% block nav %}
+  <li><a href="#" onclick="switchPitch()">AQS Alpha</a></li>
+  {% endblock %}
+
+
+
+{% block rightnav %}
+<!--<li><a href="http://mediacity.i-dat.org">MediaCity 5</a></li>
+<li><a href="/draft/">API Draft</a></li>-->
+<!--<li><a href="https://github.com/i-dat-qualia">Species: All</a></li>
+<li><a href="https://github.com/i-dat-qualia">Dataset: All</a></li>-->
+<!--<li><a href="/trees/add/">Add Tree</a></li>-->
+{% endblock %}
+
+{% block content %}
+
+<div id="map-canvas">
+
+</div>
+
+
+<div id="tree-modal" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="modal-name">Modal title</h4>
+      </div>
+      <div class="modal-body">
+
+        <div class="row">
+            <div class="col-md-6">
+              <img style="width:100%;" src="" id="modal-image" />
+              <p id="modal-image-info">No Image</p>
+            </div>
+            <div class="col-md-6">
+              <p>Species: <span id="modal-species"></span></p>
+              <p>Dataset: <span id="modal-dataset"></span></p>
+              <p>Org: <span id="modal-org"></span></p>
+              <p>Est. Age: <span id="modal-age"></span></p>
+              <p>Info:</p>
+              <p id="modal-info">{{tree.info}}</p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a href="" id="modal-link"><button type="button" class="btn btn-default">More Info</button></a>
+        <!--<button type="button" class="btn btn-primary">Save changes</button>-->
+
+
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+{% endblock %}
+
+{% block pageScripts %}
+<style>
+body { padding-top: 0px;}
+
+</style>
+
+<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.21.0/mapbox-gl.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.21.0/mapbox-gl.css' rel='stylesheet' />
+
+<!--<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v1.3.0/mapbox-gl-geocoder.js'></script>
+<link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v1.3.0/mapbox-gl-geocoder.css' type='text/css' />-->
+
+<script src="https://js.pusher.com/3.1/pusher.min.js"></script>
+<script src="{{STATIC_URL}}js/aqsmap.js"></script>
+
+<script>
+//$( document ).ready(function() {
+
+// Set orientation to user's bearing
+  /*
+    if (window.DeviceOrientationEvent) {
+        //map.setZoom(16);
+        window.addEventListener('deviceorientation', function(event) {
+            var orientation = -event.alpha;
+            map.setBearing(orientation);
+        });
+    }
+    */
+
+
+//})
+
+var pusher = new Pusher('69fd7ece64cc89e58187', {
+      cluster: 'eu',
+      encrypted: true
+    });
+
+    var channel = pusher.subscribe('refresh_aqs_data');
+    channel.bind('refresh_aqs_data_now', function(data) {
+      //console.log(data);
+      aqs_source.setData(data_url);
+    });
+</script>
+
+{% endblock %}

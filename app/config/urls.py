@@ -9,10 +9,12 @@ import config.api_urls
 import registration.backends.default.urls
 import dashboard.urls
 import trees.urls
+import airquality.urls
 
 urlpatterns = [
     url(r'^$', dashboard.views.front_page),
     url(r'^trees/', include(trees.urls)),
+    url(r'^aqs/', include(airquality.urls)),
     url(r'^draft/', dashboard.views.draft_page),
     url(r'^props/', dashboard.views.props_page),
     url(r'^admin/', include(admin.site.urls)),

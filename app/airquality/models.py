@@ -6,6 +6,12 @@ from django.contrib.postgres.fields import ArrayField
 from django.contrib.postgres.fields import JSONField
 import uuid
 
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
+import pusher
+
+
 
 class AirQualMeta(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -40,3 +46,16 @@ class Reading(AirQualMeta):
     def __unicode__(self):
         # return self.device.identifier
         return str(self.added)
+
+
+@receiver(post_save, sender=Reading, dispatch_uid="refresh_aqs_data")
+def update_stock(sender, instance, **kwargs):
+    pusher_client = pusher.Pusher(
+        app_id='228273',
+        key='69fd7ece64cc89e58187',
+        secret='0d766ecef1bd29ef8ae3',
+        cluster='eu',
+        ssl=True
+    )
+
+    pusher_client.trigger('refresh_aqs_data', 'refresh_aqs_data_now', {})
