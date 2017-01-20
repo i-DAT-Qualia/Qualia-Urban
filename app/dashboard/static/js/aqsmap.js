@@ -1,7 +1,6 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoidGhpc2lzdGhlY2hyaXMiLCJhIjoiWGtjZnRXMCJ9.DJPpDDWnqux6wsFHStG_mQ';
 
 var data_url = "/aqs/geojson/";
-var aqs_source = new mapboxgl.GeoJSONSource({data:data_url});
 
 var map = new mapboxgl.Map({
   container: 'map-canvas',
@@ -13,27 +12,6 @@ var map = new mapboxgl.Map({
   pitch: 0, // pitch in degrees
   bearing: 0, // bearing in degrees
 });
-
-function get_tree_data(id){
-  $.getJSON( "/trees/"+id+"/json/", function( data ) {
-        console.log(data)
-        $('#modal-name').html(data["name"]);
-        $('#modal-info').html(data["info"]);
-        $('#modal-species').html(data["species"]["name"]);
-        $('#modal-dataset').html(data["dataset"]["name"]);
-        $('#modal-org').html(data["org"]["name"]);
-        $('#modal-age').html(data["age"]);
-        $('#modal-link').attr("href", "/trees/"+id+"/");
-        if (data["photo"]){
-          $('#modal-image').attr("src", data["photo"]);
-          $('#modal-image-info').html("");
-        }else {
-          $('#modal-image').attr("src", "");
-          $('#modal-image-info').html("No Image");
-        }
-
-  });
-}
 
 function switchPitch(){
   if (map.getPitch() == 60){
@@ -48,38 +26,43 @@ map.on('load', function(){
   map.addControl(new mapboxgl.Navigation({position: 'bottom-left'}));
   map.addControl(new mapboxgl.Geolocate({position: 'bottom-left'}));
 
-  map.addSource("aqs", aqs_source);
+  map.addSource("aqs",{
+        type: "geojson",
+        data: data_url,
+  });
 
-  map.addLayer({
-        "id": "aqs",
-        "type": "circle",
-        "source": "aqs",
-        "paint": {
-            "circle-opacity": 0.4,
-            "circle-color": "#009900",
-        }
+    var layers = [
+        [0, '#9CFF9C'],
+        [12, '#31FF00'],
+        [24, '#31CF00'],
+        [36, '#FFFF00'],
+        [42, '#FFCF00'],
+        [48, '#FF9A00'],
+        [54, '#FF6464'],
+        [59, '#FF0000'],
+        [65, '#990000'],
+        [71, '#CE30FF'],
+    ];
+
+
+    layers.forEach(function (layer, i) {
+        map.addLayer({
+            "id": "cluster-" + i,
+            "type": "circle",
+            "source": "aqs",
+            "paint": {
+                "circle-color": layer[1],
+                "circle-radius": 20,
+                "circle-opacity": 0.4,
+                "circle-blur": 1 // blur the circles to get a heatmap look
+            },
+            "filter": i === layers.length - 1 ?
+                [">=", "pm2point5con", layer[0]] :
+                ["all",
+                    [">=", "pm2point5con", layer[0]],
+                    ["<", "pm2point5con", layers[i + 1][0]]]
+        }, 'waterway-label');
     });
 
+
 })
-
-map.on('click', function (e) {
-    // Use queryRenderedFeatures to get features at a click event's point
-    // Use layer option to avoid getting results from other layers
-    var features = map.queryRenderedFeatures(e.point, { layers: ['trees'] });
-    // if there are features within the given radius of the click event,
-    // fly to the location of the click event
-    if (features.length) {
-        // Get coordinates from the symbol and center the map on those coordinates
-        //get_tree_data(features[0]["properties"]["id"])
-        //$('#tree-modal').modal();
-        map.flyTo({center: features[0].geometry.coordinates, zoom: 18});
-    }
-});
-
-
-// Use the same approach as above to indicate that the symbols are clickable
-// by changing the cursor style to 'pointer'.
-map.on('mousemove', function (e) {
-    var features = map.queryRenderedFeatures(e.point, { layers: ['symbols'] });
-    //map.getCanvas().style.cursor = features.length ? 'pointer' : '';
-});

@@ -26,7 +26,8 @@ def return_geojson(request):
             "properties": {
                 "description": 'reading',
                 "icon": "reading",
-                "id": reading.id
+                "id": reading.id,
+                "pm2point5con": reading.pm2point5con
             },
             "geometry": {
                 "type": "Point",
