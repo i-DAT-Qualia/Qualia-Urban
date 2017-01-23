@@ -27,7 +27,7 @@ def process_reading(data):
             pm10con=data["reading"]["pm10"]["concentration"],
             pm2point5count=data["reading"]["pm2point5"]["count"],
             pm2point5con=data["reading"]["pm2point5"]["concentration"],
-            gps=Point(data["location"]["longitude"], data["location"]["latitude"]),
+            gps=Point(data["location"]["coords"]["longitude"], data["location"]["coords"]["latitude"]),
             data=data
         )
         reading.save()
