@@ -35,7 +35,7 @@ def return_geojson(request, id=None):
                 "id": reading.id,
                 "pm10count": reading.pm10count,
                 "pm10con": reading.pm10con,
-                "pm2point5count": pm2point5count,
+                "pm2point5count": reading.pm2point5count,
                 "pm2point5con": reading.pm2point5con,
             },
             "geometry": {
