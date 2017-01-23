@@ -1,7 +1,5 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoidGhpc2lzdGhlY2hyaXMiLCJhIjoiWGtjZnRXMCJ9.DJPpDDWnqux6wsFHStG_mQ';
 
-var data_url = "/aqs/geojson/";
-
 var map = new mapboxgl.Map({
   container: 'map-canvas',
   //style: 'mapbox://styles/thisisthechris/ciqwhdhhb0010h9nplbeb0oja',

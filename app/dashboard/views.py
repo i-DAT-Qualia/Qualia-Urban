@@ -33,11 +33,20 @@ def tree_map(request):
     }, context_instance=RequestContext(request))
 
 
-def aqs_map(request):
-    return render_to_response('map/aqs.html', {
-        # "trees": Tree.objects.all(),
-    }, context_instance=RequestContext(request))
+def aqs_map(request, id=None):
+    if id:
+        return render_to_response('map/aqs.html', {
+            "id": id
+        }, context_instance=RequestContext(request))
+    else:
+        return render_to_response('map/aqs.html', {
+        }, context_instance=RequestContext(request))
 
+@xframe_options_exempt
+def aqs_map_widget(request, id=None):
+    return render_to_response('map/aqs_widget.html', {
+        "id": id
+    }, context_instance=RequestContext(request))
 
 @xframe_options_exempt
 def tree_map_widget(request):

@@ -12,8 +12,14 @@ import json
 from django.conf import settings
 
 
-def return_geojson(request):
-    readings = Reading.objects.all()
+def return_geojson(request, id=None):
+    readings = None
+
+    if id:
+        device = get_object_or_404(Device, id=id)
+        readings = Reading.objects.filter(device=device)
+    else:
+        readings = Reading.objects.all()
 
     response = {
         "type": "FeatureCollection",

@@ -1,0 +1,48 @@
+{% extends "widget_base.html" %}
+{% load staticfiles %}
+{% load ui %}
+
+{% block title %}AQS{% endblock %}
+
+
+
+
+
+{% block content %}
+
+<div id="map-canvas">
+
+</div>
+
+
+
+
+{% endblock %}
+
+{% block pageScripts %}
+<style>
+body { padding-top: 0px;}
+
+</style>
+
+<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.21.0/mapbox-gl.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.21.0/mapbox-gl.css' rel='stylesheet' />
+
+<!--<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v1.3.0/mapbox-gl-geocoder.js'></script>
+<link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v1.3.0/mapbox-gl-geocoder.css' type='text/css' />-->
+
+<script>
+{% if id %}
+//id
+var data_url = "/aqs/geojson/{{id}}/";
+{% else %}
+//no id
+var data_url = "/aqs/geojson/";
+{% endif %}
+</script>
+
+<script src="{{STATIC_URL}}js/aqsmap.js"></script>
+
+
+
+{% endblock %}
