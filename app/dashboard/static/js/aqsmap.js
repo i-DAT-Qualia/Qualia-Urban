@@ -1,5 +1,7 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoidGhpc2lzdGhlY2hyaXMiLCJhIjoiWGtjZnRXMCJ9.DJPpDDWnqux6wsFHStG_mQ';
 
+var aqs_source = new mapboxgl.GeoJSONSource({data:data_url});
+
 var map = new mapboxgl.Map({
   container: 'map-canvas',
   //style: 'mapbox://styles/thisisthechris/ciqwhdhhb0010h9nplbeb0oja',
@@ -24,10 +26,11 @@ map.on('load', function(){
   map.addControl(new mapboxgl.Navigation({position: 'bottom-left'}));
   map.addControl(new mapboxgl.Geolocate({position: 'bottom-left'}));
 
-  map.addSource("aqs",{
-        type: "geojson",
-        data: data_url,
-  });
+  //map.addSource("aqs",{
+  //      type: "geojson",
+  //      data: data_url,
+  //})
+  map.addSource("aqs", aqs_source);;
 
     var layers = [
         [0, '#9CFF9C'],

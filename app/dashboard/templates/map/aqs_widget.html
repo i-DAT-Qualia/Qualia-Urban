@@ -41,8 +41,22 @@ var data_url = "/aqs/geojson/";
 {% endif %}
 </script>
 
+<script src="https://js.pusher.com/3.1/pusher.min.js"></script>
+
+
 <script src="{{STATIC_URL}}js/aqsmap.js"></script>
 
+<script>
+var pusher = new Pusher('69fd7ece64cc89e58187', {
+      cluster: 'eu',
+      encrypted: true
+    });
 
+    var channel = pusher.subscribe('refresh_aqs_data');
+    channel.bind('refresh_aqs_data_now', function(data) {
+      //console.log(data);
+      aqs_source.setData(data_url);
+    });
+</script>
 
 {% endblock %}
