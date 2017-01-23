@@ -19,7 +19,10 @@ def process_reading(data):
     print data["reading"]["pm10"]["count"]
 
     try:
+        device, created = Device.objects.get_or_create(identifier=data["uuid"])
+        device.save()
         reading = Reading(
+            device=device,
             pm10count=data["reading"]["pm10"]["count"],
             pm10con=data["reading"]["pm10"]["concentration"],
             pm2point5count=data["reading"]["pm2point5"]["count"],

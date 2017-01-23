@@ -33,7 +33,10 @@ def return_geojson(request, id=None):
                 "description": 'reading',
                 "icon": "reading",
                 "id": reading.id,
-                "pm2point5con": reading.pm2point5con
+                "pm10count": reading.pm10count,
+                "pm10con": reading.pm10con,
+                "pm2point5count": pm2point5count,
+                "pm2point5con": reading.pm2point5con,
             },
             "geometry": {
                 "type": "Point",
