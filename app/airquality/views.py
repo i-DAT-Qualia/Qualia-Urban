@@ -12,10 +12,13 @@ import json
 from django.conf import settings
 
 
-def return_geojson(request, id=None):
+def return_geojson(request, id=None, localid=None):
     readings = None
 
-    if id:
+    if localid:
+        device = get_object_or_404(Device, identifier=localid)
+        readings = Reading.objects.filter(device=device)
+    elif id:
         device = get_object_or_404(Device, id=id)
         readings = Reading.objects.filter(device=device)
     else:
