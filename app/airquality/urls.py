@@ -7,6 +7,7 @@ urlpatterns = [
     url(r'^$', dashboard.views.aqs_map),
     url(r'^device/localid/(?P<localid>[^/]+)/', dashboard.views.aqs_map),
     url(r'^device/(?P<id>[^/]+)/', dashboard.views.aqs_map),
+    url(r'^geojson/localid/(?P<localid>[^/]+)/', airquality.views.return_geojson),
     url(r'^geojson/(?P<id>[^/]+)/', airquality.views.return_geojson),
     url(r'^geojson/', airquality.views.return_geojson),
     url(r'^embed/device/localid/(?P<localid>[^/]+)/', dashboard.views.aqs_map_widget),
