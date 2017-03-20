@@ -5,9 +5,11 @@ import dashboard.views
 
 urlpatterns = [
     url(r'^$', dashboard.views.aqs_map),
+    url(r'^mean/', dashboard.views.aqs_map_mean),
     url(r'^device/localid/(?P<localid>[^/]+)/', dashboard.views.aqs_map),
     url(r'^device/(?P<id>[^/]+)/', dashboard.views.aqs_map),
     url(r'^geojson/localid/(?P<localid>[^/]+)/', airquality.views.return_geojson),
+    url(r'^geojson/mean/', airquality.views.return_geojson_mean),
     url(r'^geojson/(?P<id>[^/]+)/', airquality.views.return_geojson),
     url(r'^geojson/', airquality.views.return_geojson),
     url(r'^embed/device/localid/(?P<localid>[^/]+)/', dashboard.views.aqs_map_widget),

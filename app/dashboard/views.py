@@ -34,6 +34,11 @@ def tree_map(request):
     }, context_instance=RequestContext(request))
 
 
+def aqs_map_mean(request):
+    return render_to_response('map/aqs_mean.html', {
+        'date': request.GET.get('date')
+    }, context_instance=RequestContext(request))
+
 def aqs_map(request, id=None, localid=None):
     if localid:
         return render_to_response('map/aqs.html', {

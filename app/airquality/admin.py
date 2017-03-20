@@ -6,3 +6,4 @@ class MetaAdmin(admin.OSMGeoAdmin):
 
 admin.site.register(Device)
 admin.site.register(Reading, MetaAdmin)
+admin.site.register(Analysis, MetaAdmin)

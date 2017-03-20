@@ -48,6 +48,16 @@ class Reading(AirQualMeta):
         return str(self.added)
 
 
+class Analysis(AirQualMeta):
+    poly = models.PolygonField()
+    objects = models.GeoManager()
+
+    def __unicode__(self):
+        # return self.device.identifier
+        return str(self.poly)
+
+
+
 @receiver(post_save, sender=Reading, dispatch_uid="refresh_aqs_data")
 def update_stock(sender, instance, **kwargs):
     pusher_client = pusher.Pusher(
