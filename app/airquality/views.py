@@ -25,6 +25,12 @@ def return_geojson(request, id=None, localid=None):
     else:
         readings = Reading.objects.all()
 
+    if request.GET.get('date'):
+        date = datetime.datetime.strptime(request.GET.get('date'), '%Y-%m-%d').date()
+        readings = readings.filter(
+            addded__date=date
+        )
+
     response = {
         "type": "FeatureCollection",
         "features": []

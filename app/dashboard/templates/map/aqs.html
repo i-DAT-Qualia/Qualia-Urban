@@ -84,6 +84,10 @@ var data_url = "/aqs/geojson/{{id}}/";
 //noid
 var data_url = "/aqs/geojson/";
 {% endif %}
+
+{%if date%}
+data_url = data_url + '?date={{date}}'
+{% endif %}
 </script>
 <script src="{{STATIC_URL}}js/aqsmap.js"></script>
 
@@ -103,6 +107,10 @@ var data_url = "/aqs/geojson/";
 
 
 //})
+
+{%if lat and long%}
+  map.setCenter([{{lat}},{{long}}]);
+{%endif%}
 
 var pusher = new Pusher('69fd7ece64cc89e58187', {
       cluster: 'eu',

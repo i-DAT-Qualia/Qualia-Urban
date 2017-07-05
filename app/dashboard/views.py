@@ -42,14 +42,23 @@ def aqs_map_mean(request):
 def aqs_map(request, id=None, localid=None):
     if localid:
         return render_to_response('map/aqs.html', {
-            "id": get_object_or_404(Device, identifier=localid).id
+            "id": get_object_or_404(Device, identifier=localid).id,
+            'date': request.GET.get('date'),
+            'lat': request.GET.get('lat'),
+            'long': request.GET.get('long'),
         }, context_instance=RequestContext(request))
     elif id:
         return render_to_response('map/aqs.html', {
-            "id": id
+            "id": id,
+            'date': request.GET.get('date'),
+            'lat': request.GET.get('lat'),
+            'long': request.GET.get('long'),
         }, context_instance=RequestContext(request))
     else:
         return render_to_response('map/aqs.html', {
+            'date': request.GET.get('date'),
+            'lat': request.GET.get('lat'),
+            'long': request.GET.get('long'),
         }, context_instance=RequestContext(request))
 
 @xframe_options_exempt
