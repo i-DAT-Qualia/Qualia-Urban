@@ -28,7 +28,7 @@ def return_geojson(request, id=None, localid=None):
     if request.GET.get('date'):
         date = datetime.datetime.strptime(request.GET.get('date'), '%Y-%m-%d').date()
         readings = readings.filter(
-            addded__date=date
+            added__date=date
         )
 
     response = {
